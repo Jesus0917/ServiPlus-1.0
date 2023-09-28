@@ -156,7 +156,7 @@ class _AuthScreenState extends State<AuthScreen> {
             children: <Widget>[
               InkWell(
                 onTap: openFacebookPage,
-                child: Image.asset('assets/logo.jpg', width: 200, height: 200),
+                child: Image.asset('assets/logo.png', width: 200, height: 200),
               ),
               Padding(
                 padding: EdgeInsets.all(16.0),
