@@ -200,7 +200,17 @@ class _AuthScreenState extends State<AuthScreen> {
                 onPressed: register,
                 child: Text('¿No tienes una cuenta? Regístrate aquí.'),
               ),
-              buildSignInButtons(),
+              buildSignInButtons(),ElevatedButton(
+              onPressed: () {
+                // Navegar a Pagina1
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+              child: Text('Ir a homescreen'),
+            ),
+
             ],
           ),
         ),
