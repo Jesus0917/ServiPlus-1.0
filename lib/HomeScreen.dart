@@ -116,7 +116,7 @@ class ServiceCard extends StatelessWidget {
               Image.asset(
                 imagePath,
                 fit: BoxFit.contain, // Ajustar la imagen al contenedor
-                height: 50, // Altura deseada para la imagen
+                height: 40, // Altura deseada para la imagen
               ),
               SizedBox(height: 10.0), // Espacio entre la imagen y el texto
               Padding(
