@@ -3,12 +3,11 @@ import 'HomeScreen.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 Color miColorPersonalizado = Color(0xFF1F3DD0);
-//prueba
+
 void main() {
   runApp(MyApp());
 }
 
-//comentario de prueba dos
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -37,7 +36,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.transparent,
         ),
       ),
-      home: AuthScreen(), // Cambiado de initialRoute a home
+      home: AuthScreen(),
       routes: {
         '/register': (context) => RegisterScreen(),
       },
@@ -80,7 +79,6 @@ class _AuthScreenState extends State<AuthScreen> {
           isLoggedIn = true;
         });
 
-        // Navegar a la HomeScreen después del inicio de sesión exitoso
         Navigator.push(
             context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } else {
@@ -136,7 +134,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoggedIn) {
-      return HomeScreen(); // Cambiado para mostrar HomeScreen después de iniciar sesión
+      return HomeScreen();
     } else {
       return Scaffold(
         appBar: PreferredSize(
@@ -154,68 +152,71 @@ class _AuthScreenState extends State<AuthScreen> {
             elevation: 0,
           ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              InkWell(
-                onTap: openFacebookPage,
-                child: Image.asset('assets/logo.png', width: 200, height: 200),
-              ),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: TextField(
-                  controller: emailController,
-                  decoration: InputDecoration(
-                    labelText: 'Correo Electrónico',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+        body: SingleChildScrollView(
+          // Usamos SingleChildScrollView para hacer la pantalla desplazable
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                InkWell(
+                  onTap: openFacebookPage,
+                  child:
+                      Image.asset('assets/logo.png', width: 200, height: 200),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: emailController,
+                    decoration: InputDecoration(
+                      labelText: 'Correo Electrónico',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 16.0),
-              Padding(
-                padding: EdgeInsets.all(16.0),
-                child: TextField(
-                  controller: passwordController,
-                  decoration: InputDecoration(
-                    labelText: 'Contraseña',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12.0),
+                SizedBox(height: 16.0),
+                Padding(
+                  padding: EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: passwordController,
+                    decoration: InputDecoration(
+                      labelText: 'Contraseña',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                    ),
+                    obscureText: true,
+                  ),
+                ),
+                SizedBox(height: 16.0),
+                SizedBox(
+                  width: double.infinity,
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: ElevatedButton(
+                      onPressed: login,
+                      child: Text('Iniciar Sesión'),
                     ),
                   ),
-                  obscureText: true,
                 ),
-              ),
-              SizedBox(height: 16.0),
-              SizedBox(
-                width: double.infinity,
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ElevatedButton(
-                    onPressed: login,
-                    child: Text('Iniciar Sesión'),
-                  ),
+                SizedBox(height: 8.0),
+                TextButton(
+                  onPressed: register,
+                  child: Text('¿No tienes una cuenta? Regístrate aquí.'),
                 ),
-              ),
-              SizedBox(height: 8.0),
-              TextButton(
-                onPressed: register,
-                child: Text('¿No tienes una cuenta? Regístrate aquí.'),
-              ),
-              buildSignInButtons(),
-              ElevatedButton(
-                onPressed: () {
-                  // Navegar a Pagina1
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
-                },
-                child: Text('Ir a homescreen'),
-              ),
-            ],
+                buildSignInButtons(),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                    );
+                  },
+                  child: Text('Ir a homescreen'),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -265,7 +266,7 @@ class _AuthScreenState extends State<AuthScreen> {
     return ElevatedButton(
       onPressed: () {
         // Lógica para iniciar sesión con Google
-      }, // Botón de Facebook sin acción
+      },
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
@@ -395,7 +396,7 @@ class RegisterScreen extends StatelessWidget {
 
   ElevatedButton buildFacebookSignInButton() {
     return ElevatedButton(
-      onPressed: null, // Botón de Facebook sin acción
+      onPressed: null,
       style: ButtonStyle(
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
@@ -420,21 +421,15 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class homescreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Home Screen'),
+      ),
       body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navegar a HomeScreen al hacer clic en el botón
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
-            );
-          },
-          child: Text('Ir a HomeScreen'),
-        ),
+        child: Text('Bienvenido a la pantalla de inicio'),
       ),
     );
   }
