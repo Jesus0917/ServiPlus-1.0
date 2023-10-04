@@ -105,7 +105,7 @@ class ServiceCard extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(200.0), // Borde circular
         child: Container(
-          height: 20, // Ajustar la altura del contenedor
+          height: 10, // Ajustar la altura del contenedor
           width: double.infinity,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 224, 224, 224),
@@ -116,9 +116,9 @@ class ServiceCard extends StatelessWidget {
               Image.asset(
                 imagePath,
                 fit: BoxFit.contain, // Ajustar la imagen al contenedor
-                height: 90, // Altura deseada para la imagen
+                height: 50, // Altura deseada para la imagen
               ),
-              SizedBox(height: 15.0), // Espacio entre la imagen y el texto
+              SizedBox(height: 10.0), // Espacio entre la imagen y el texto
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
