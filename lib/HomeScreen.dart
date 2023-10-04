@@ -7,6 +7,7 @@ void main() {
   ));
 }
 
+//homescreen
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -25,24 +26,23 @@ class _HomeScreenState extends State<HomeScreen> {
     {'name': 'Lavanderia', 'image': 'assets/servicio-de-lavanderia.png'},
   ];
 
-  int _currentIndex = 0; // Índice de la opción seleccionada en la barra de navegación
+  int _currentIndex =
+      0; // Índice de la opción seleccionada en la barra de navegación
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false, 
-        backgroundColor: Colors.transparent, 
-        elevation: 0, 
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Center(
           child: Text(
             'Servicios',
             style: TextStyle(
               fontSize: 27.0,
-              fontWeight: FontWeight.bold, 
-              color: Colors.black, 
-         
-       
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
           ),
         ),
@@ -65,10 +65,10 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _currentIndex, // Índice de la opción seleccionada
         onTap: (int index) {
           setState(() {
-            _currentIndex = index; // Actualiza el índice cuando se toca una opción
+            _currentIndex =
+                index; // Actualiza el índice cuando se toca una opción
             if (_currentIndex == 0) {
               // aquí colocar a dónde se quiere llevar, es decir, al home
-              
             } else if (_currentIndex == 1) {
               // aquí colocar la página de configuración
             }
@@ -111,7 +111,8 @@ class ServiceCard extends StatelessWidget {
             color: Color.fromARGB(255, 224, 224, 224),
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center, // Centrar el contenido verticalmente
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Centrar el contenido verticalmente
             children: [
               Image.asset(
                 imagePath,
