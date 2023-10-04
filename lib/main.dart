@@ -420,19 +420,20 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('HomeScreen'),
-        centerTitle: true,
-        elevation: 0,
-      ),
       body: Center(
-        child: Text(
-          '¡Bienvenido a la pantalla de inicio!',
-          style: TextStyle(fontSize: 24),
+        child: ElevatedButton(
+          onPressed: () {
+            // Navegar a HomeScreen al hacer clic en el botón
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomeScreen()),
+            );
+          },
+          child: Text('Ir a HomeScreen'),
         ),
       ),
     );
