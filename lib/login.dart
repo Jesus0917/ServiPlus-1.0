@@ -421,7 +421,7 @@ class RegisterScreen extends StatelessWidget {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class homescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
