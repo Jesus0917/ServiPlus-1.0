@@ -7,7 +7,6 @@ void main() {
   ));
 }
 
-//homescreen
 class HomeScreen extends StatefulWidget {
   @override
   _HomeScreenState createState() => _HomeScreenState();
