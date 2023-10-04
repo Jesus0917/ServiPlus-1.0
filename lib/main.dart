@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'HomeScreen.dart'; 
+import 'HomeScreen.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+//Miguel es gey
 Color miColorPersonalizado = Color(0xFF1F3DD0);
 //prueba
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
         900: miColorPersonalizado.withOpacity(0.9),
       },
     );
-     
+
     return MaterialApp(
       title: 'ServiPlus',
       debugShowCheckedModeBanner: false,
@@ -73,20 +74,23 @@ class _AuthScreenState extends State<AuthScreen> {
       final enteredEmail = emailController.text;
       final enteredPassword = passwordController.text;
 
-      if (enteredEmail == registeredEmail && enteredPassword == registeredPassword) {
+      if (enteredEmail == registeredEmail &&
+          enteredPassword == registeredPassword) {
         setState(() {
           isLoggedIn = true;
         });
 
         // Navegar a la HomeScreen después del inicio de sesión exitoso
-        Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       } else {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: Text('Error de inicio de sesión'),
-              content: Text('Credenciales incorrectas. Verifica tu correo y contraseña.'),
+              content: Text(
+                  'Credenciales incorrectas. Verifica tu correo y contraseña.'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
@@ -200,17 +204,17 @@ class _AuthScreenState extends State<AuthScreen> {
                 onPressed: register,
                 child: Text('¿No tienes una cuenta? Regístrate aquí.'),
               ),
-              buildSignInButtons(),ElevatedButton(
-              onPressed: () {
-                // Navegar a Pagina1
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-              },
-              child: Text('Ir a homescreen'),
-            ),
-
+              buildSignInButtons(),
+              ElevatedButton(
+                onPressed: () {
+                  // Navegar a Pagina1
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
+                },
+                child: Text('Ir a homescreen'),
+              ),
             ],
           ),
         ),
@@ -333,7 +337,10 @@ class RegisterScreen extends StatelessWidget {
               onPressed: () {
                 final registerEmail = registerEmailController.text;
                 final registerPassword = registerPasswordController.text;
-                final result = {'email': registerEmail, 'password': registerPassword};
+                final result = {
+                  'email': registerEmail,
+                  'password': registerPassword
+                };
                 Navigator.pop(context, result);
               },
               child: Text('Registrarse'),
