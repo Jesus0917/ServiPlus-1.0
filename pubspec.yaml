@@ -32,7 +32,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  url_launcher: ^6.1.14 # Mueve esta línea a la sección de dependencies
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
