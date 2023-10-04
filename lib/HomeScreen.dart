@@ -13,10 +13,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  // Lista de servicios con sus nombres y rutas de imágenes
   final List<Map<String, String>> services = [
     {'name': 'Plomero', 'image': 'assets/plomero.png'},
-    {'name': 'Limpiador', 'image': 'assets/limpiador.png'},
+    {'name': 'Aseador', 'image': 'assets/limpiador.png'},
     {'name': 'Profesor', 'image': 'assets/profesor.png'},
     {'name': 'Electricista', 'image': 'assets/rayo.png'},
     {'name': 'Mecanico', 'image': 'assets/reparando.png'},
@@ -25,23 +24,31 @@ class _HomeScreenState extends State<HomeScreen> {
     {'name': 'Lavanderia', 'image': 'assets/servicio-de-lavanderia.png'},
   ];
 
-  int _currentIndex =
-      0; // Índice de la opción seleccionada en la barra de navegación
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Center(
-          child: Text(
-            'Servicios',
-            style: TextStyle(
-              fontSize: 27.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(80.0), // Altura personalizada de la AppBar
+        child: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          title: Center(
+            child: Text(
+              'Servicios',
+              style: TextStyle(
+                fontSize: 27.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(20.0),
+              bottomRight: Radius.circular(20.0),
             ),
           ),
         ),
@@ -61,16 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex, // Índice de la opción seleccionada
+        currentIndex: _currentIndex,
         onTap: (int index) {
           setState(() {
-            _currentIndex =
-                index; // Actualiza el índice cuando se toca una opción
-            if (_currentIndex == 0) {
-              // aquí colocar a dónde se quiere llevar, es decir, al home
-            } else if (_currentIndex == 1) {
-              // aquí colocar la página de configuración
-            }
+            _currentIndex = index;
           });
         },
         items: [
@@ -102,23 +103,22 @@ class ServiceCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(200.0),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(200.0), // Borde circular
+        borderRadius: BorderRadius.circular(200.0),
         child: Container(
-          height: 10, // Ajustar la altura del contenedor
+          height: 10,
           width: double.infinity,
           decoration: BoxDecoration(
             color: Color.fromARGB(255, 224, 224, 224),
           ),
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Centrar el contenido verticalmente
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
                 imagePath,
-                fit: BoxFit.contain, // Ajustar la imagen al contenedor
-                height: 40, // Altura deseada para la imagen
+                fit: BoxFit.contain,
+                height: 40,
               ),
-              SizedBox(height: 10.0), // Espacio entre la imagen y el texto
+              SizedBox(height: 10.0),
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
