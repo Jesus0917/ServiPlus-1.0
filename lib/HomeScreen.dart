@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(80.0), // Altura personalizada de la AppBar
+        preferredSize: Size.fromHeight(60.0), // Altura personalizada de la AppBar
         child: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
@@ -80,6 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.account_box),
+            label: 'Account',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Settings',
           ),
@@ -104,32 +108,37 @@ class ServiceCard extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(200.0),
-        child: Container(
-          height: 10,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Color.fromARGB(255, 224, 224, 224),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                imagePath,
-                fit: BoxFit.contain,
-                height: 40,
-              ),
-              SizedBox(height: 10.0),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  serviceName,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    fontWeight: FontWeight.bold,
+        child: InkWell(
+          onTap: () {
+            // Puedes agregar la lógica que desees al hacer clic en el servicio.
+          },
+          child: Container(
+            height: 150, // Ajusta la altura del contenedor
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 224, 224, 224),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  imagePath,
+                  fit: BoxFit.contain,
+                  height: 60, // Ajusta el tamaño de la imagen
+                ),
+                SizedBox(height: 10.0),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    serviceName,
+                    style: TextStyle(
+                      fontSize: 16.0, // Ajusta el tamaño de fuente
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
