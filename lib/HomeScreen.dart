@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:dot_navigation_bar/dot_navigation_bar.dart';
 import 'WorkerProfileScreen.dart';
 
 void main() {
@@ -6,7 +7,7 @@ void main() {
     home: HomeScreen(),
     debugShowCheckedModeBanner: false,
     routes: {
-      '/worker_profile': (context) => workprofilescreen(),
+      '/worker_profile': (context) => WorkerProfileScreen(),
     },
   ));
 }
@@ -154,7 +155,7 @@ class ServiceCard extends StatelessWidget {
   }
 }
 
-class workprofilescreen extends StatelessWidget {
+class WorkerProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
