@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'WorkerProfileScreen.dart';
 
 void main() {
   runApp(MaterialApp(
     home: HomeScreen(),
     debugShowCheckedModeBanner: false,
+    routes: {
+      '/worker_profile': (context) => workprofilescreen(),
+    },
   ));
 }
 
@@ -30,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60.0), // Altura personalizada de la AppBar
+        preferredSize: Size.fromHeight(60.0),
         child: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: Colors.transparent,
@@ -70,18 +74,22 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-          });
+          if (index == 1) {
+            Navigator.pushNamed(context, '/worker_profile');
+          } else {
+            setState(() {
+              _currentIndex = index;
+            });
+          }
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.account_box),
             label: 'Account',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -113,7 +121,7 @@ class ServiceCard extends StatelessWidget {
             // Puedes agregar la lógica que desees al hacer clic en el servicio.
           },
           child: Container(
-            height: 150, // Ajusta la altura del contenedor
+            height: 150,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 224, 224, 224),
@@ -124,7 +132,7 @@ class ServiceCard extends StatelessWidget {
                 Image.asset(
                   imagePath,
                   fit: BoxFit.contain,
-                  height: 60, // Ajusta el tamaño de la imagen
+                  height: 60,
                 ),
                 SizedBox(height: 10.0),
                 Padding(
@@ -132,7 +140,7 @@ class ServiceCard extends StatelessWidget {
                   child: Text(
                     serviceName,
                     style: TextStyle(
-                      fontSize: 16.0, // Ajusta el tamaño de fuente
+                      fontSize: 16.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -141,6 +149,20 @@ class ServiceCard extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+class workprofilescreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('hola'),
+      ),
+      body: Center(
+        child: Text('Bienvenido a la pantalla de inicio'),
       ),
     );
   }
