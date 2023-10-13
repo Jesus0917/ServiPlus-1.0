@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:dot_navigation_bar/dot_navigation_bar.dart';
+
 import 'WorkerProfileScreen.dart';
 
 void main() {
@@ -7,7 +7,7 @@ void main() {
     home: HomeScreen(),
     debugShowCheckedModeBanner: false,
     routes: {
-      '/worker_profile': (context) => WorkerProfileScreen(),
+      '/worker_profile': (context) => workerprofilescreen(),
     },
   ));
 }
@@ -85,12 +85,13 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_box),
-            label: 'Account',
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box),
+            label: 'Account',
+            onTap: workerprofilescreen,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -113,16 +114,16 @@ class ServiceCard extends StatelessWidget {
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(200.0),
+        borderRadius: BorderRadius.circular(200.0), // Reducir el radio de borde
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(200.0),
+        borderRadius: BorderRadius.circular(200.0), // Reducir el radio de borde
         child: InkWell(
           onTap: () {
             // Puedes agregar la lógica que desees al hacer clic en el servicio.
           },
           child: Container(
-            height: 150,
+            height: 80, // Reducir la altura de la tarjeta
             width: double.infinity,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 224, 224, 224),
@@ -133,15 +134,17 @@ class ServiceCard extends StatelessWidget {
                 Image.asset(
                   imagePath,
                   fit: BoxFit.contain,
-                  height: 60,
+                  height: 30, // Reducir el tamaño de la imagen
                 ),
-                SizedBox(height: 10.0),
+                SizedBox(
+                    height:
+                        5.0), // Reducir el espacio entre la imagen y el texto
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     serviceName,
                     style: TextStyle(
-                      fontSize: 16.0,
+                      fontSize: 12.0, // Reducir el tamaño de fuente
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -155,7 +158,16 @@ class ServiceCard extends StatelessWidget {
   }
 }
 
-class WorkerProfileScreen extends StatelessWidget {
+void goToWorkerProfileScreen(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => workerprofilescreen(),
+    ),
+  );
+}
+
+class workerprofilescreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
