@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'WorkerProfileScreen.dart';
-
 void main() {
   runApp(MaterialApp(
     home: HomeScreen(),
     debugShowCheckedModeBanner: false,
-    routes: {
-      '/worker_profile': (context) => workerprofilescreen(),
-    },
   ));
 }
 
@@ -27,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
     {'name': 'Paseador', 'image': 'assets/caminando-con-perro.png'},
     {'name': 'Cocinero', 'image': 'assets/cocinero.png'},
     {'name': 'Lavanderia', 'image': 'assets/servicio-de-lavanderia.png'},
+    // Agrega otros servicios aquí
   ];
 
   int _currentIndex = 0;
@@ -52,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(20.0),
-              bottomRight: Radius.circular(20.0),
+              bottomLeft: Radius.circular(200.0),
+              bottomRight: Radius.circular(200.0),
             ),
           ),
         ),
@@ -75,13 +71,9 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (int index) {
-          if (index == 1) {
-            Navigator.pushNamed(context, '/worker_profile');
-          } else {
-            setState(() {
-              _currentIndex = index;
-            });
-          }
+          setState(() {
+            _currentIndex = index;
+          });
         },
         items: [
           BottomNavigationBarItem(
@@ -91,7 +83,6 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Icon(Icons.account_box),
             label: 'Account',
-            onTap: workerprofilescreen,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
@@ -114,16 +105,21 @@ class ServiceCard extends StatelessWidget {
     return Card(
       elevation: 5.0,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(200.0), // Reducir el radio de borde
+        borderRadius: BorderRadius.circular(200.0),
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(200.0), // Reducir el radio de borde
+        borderRadius: BorderRadius.circular(200.0),
         child: InkWell(
           onTap: () {
-            // Puedes agregar la lógica que desees al hacer clic en el servicio.
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ListaTrabajadores(serviceName),
+              ),
+            );
           },
           child: Container(
-            height: 80, // Reducir la altura de la tarjeta
+            height: 80,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Color.fromARGB(255, 224, 224, 224),
@@ -134,17 +130,15 @@ class ServiceCard extends StatelessWidget {
                 Image.asset(
                   imagePath,
                   fit: BoxFit.contain,
-                  height: 30, // Reducir el tamaño de la imagen
+                  height: 30,
                 ),
-                SizedBox(
-                    height:
-                        5.0), // Reducir el espacio entre la imagen y el texto
+                SizedBox(height: 5.0),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     serviceName,
                     style: TextStyle(
-                      fontSize: 12.0, // Reducir el tamaño de fuente
+                      fontSize: 12.0,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -158,25 +152,58 @@ class ServiceCard extends StatelessWidget {
   }
 }
 
-void goToWorkerProfileScreen(BuildContext context) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => workerprofilescreen(),
-    ),
-  );
-}
+class ListaTrabajadores extends StatelessWidget {
+  final String serviceName;
 
-class workerprofilescreen extends StatelessWidget {
+  ListaTrabajadores(this.serviceName);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('hola'),
+        automaticallyImplyLeading: false, 
+        backgroundColor: Colors.transparent,
+        elevation: 0, // Establece la elevación en 0 para quitar la sombra
+        title: Center(
+          child: Text(
+            'Personas Disponibles - $serviceName',
+            style: TextStyle(
+              fontSize: 27.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black, // Color del texto (negro)
+            ),
+          ),
+        ),
       ),
-      body: Center(
-        child: Text('Bienvenido a la pantalla de inicio'),
+      backgroundColor: Colors.white, // Establece el fondo blanco
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+        onTap: (int index) {
+          if (index == 0) {
+            // Navegar de regreso a HomeScreen
+            Navigator.pop(context);
+          } else {
+            // Manejar otras opciones de navegación si es necesario
+          }
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_box),
+            label: 'Account',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
       ),
     );
   }
 }
+
+
+
