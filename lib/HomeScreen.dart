@@ -57,8 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 50.0,
+          mainAxisSpacing: 50.0,
         ),
         itemCount: services.length,
         itemBuilder: (context, index) {
@@ -103,7 +103,7 @@ class ServiceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5.0,
+      elevation: 0, // Establece la elevación en 0 para quitar la sombra
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(200.0),
       ),
@@ -119,18 +119,16 @@ class ServiceCard extends StatelessWidget {
             );
           },
           child: Container(
-            height: 80,
+            height: 120, // Modifica el valor de height según tus preferencias
             width: double.infinity,
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 224, 224, 224),
-            ),
+            color: Colors.white, // Establece el fondo en blanco
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   imagePath,
                   fit: BoxFit.contain,
-                  height: 30,
+                  height: 40, // Modifica el valor de height según tus preferencias
                 ),
                 SizedBox(height: 5.0),
                 Padding(
@@ -151,7 +149,6 @@ class ServiceCard extends StatelessWidget {
     );
   }
 }
-
 class ListaTrabajadores extends StatelessWidget {
   final String serviceName;
 
