@@ -165,7 +165,7 @@ class ListaTrabajadores extends StatelessWidget {
           child: Text(
             'Personas Disponibles - $serviceName',
             style: TextStyle(
-              fontSize: 27.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.black, // Color del texto (negro)
             ),
@@ -201,6 +201,3 @@ class ListaTrabajadores extends StatelessWidget {
     );
   }
 }
-
-
-
