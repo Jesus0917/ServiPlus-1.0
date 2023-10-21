@@ -11,7 +11,16 @@ class MyApp extends StatelessWidget {
     MaterialColor miMaterialColorPersonalizado = MaterialColor(
       0xFF1F3DD0, // Define un color personalizado que se usará como color principal de la aplicación.
       <int, Color>{
-        50: miColorPersonalizado.withOpacity(0.1), // Define tonos de color para sombras más claras.
+        50: miColorPersonalizado.withOpacity(0.1),
+        100: miColorPersonalizado.withOpacity(0.2),
+        200: miColorPersonalizado.withOpacity(0.3),
+        300: miColorPersonalizado.withOpacity(0.4),
+        400: miColorPersonalizado.withOpacity(0.5),
+        500: miColorPersonalizado,
+        600: miColorPersonalizado.withOpacity(0.6),
+        700: miColorPersonalizado.withOpacity(0.7),
+        800: miColorPersonalizado.withOpacity(0.8),
+        900: miColorPersonalizado.withOpacity(0.9), // Define tonos de color para sombras más claras.
         // Define tonos de color con diferentes niveles de opacidad para diversos usos.
       },
     );
