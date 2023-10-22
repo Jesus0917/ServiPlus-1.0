@@ -46,12 +46,6 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(200.0),
-              bottomRight: Radius.circular(200.0),
-            ),
-          ),
         ),
       ),
       body: GridView.builder(
