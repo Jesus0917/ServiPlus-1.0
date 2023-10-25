@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'HomeScreen.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-Color miColorPersonalizado = Color(0xFF1F3DD0);
+Color miColorPersonalizado = const Color(0xFF1F3DD0);
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     MaterialColor miMaterialColorPersonalizado = MaterialColor(
@@ -32,19 +34,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: miMaterialColorPersonalizado,
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent,
         ),
       ),
-      home: AuthScreen(),
+      home: const AuthScreen(),
       routes: {
-        '/register': (context) => RegisterScreen(),
+        '/register': (context) => const RegisterScreen(),
       },
     );
   }
 }
 
 class AuthScreen extends StatefulWidget {
+  const AuthScreen({super.key});
+
   @override
   _AuthScreenState createState() => _AuthScreenState();
 }
@@ -80,21 +84,21 @@ class _AuthScreenState extends State<AuthScreen> {
         });
 
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       } else {
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Error de inicio de sesión'),
-              content: Text(
+              title: const Text('Error de inicio de sesión'),
+              content: const Text(
                   'Credenciales incorrectas. Verifica tu correo y contraseña.'),
               actions: <Widget>[
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: Text('Cerrar'),
+                  child: const Text('Cerrar'),
                 ),
               ],
             );
@@ -106,14 +110,14 @@ class _AuthScreenState extends State<AuthScreen> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text('Error de inicio de sesión'),
-            content: Text('Debes registrarte antes de iniciar sesión.'),
+            title: const Text('Error de inicio de sesión'),
+            content: const Text('Debes registrarte antes de iniciar sesión.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('Cerrar'),
+                child: const Text('Cerrar'),
               ),
             ],
           );
@@ -134,13 +138,13 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoggedIn) {
-      return HomeScreen();
+      return const HomeScreen();
     } else {
       return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight),
+          preferredSize: const Size.fromHeight(kToolbarHeight),
           child: AppBar(
-            title: Text(
+            title: const Text(
               'Serviplus',
               style: TextStyle(
                 fontSize: 30.0,
@@ -164,7 +168,7 @@ class _AuthScreenState extends State<AuthScreen> {
                       Image.asset('assets/logo.png', width: 200, height: 200),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: TextField(
                     controller: emailController,
                     decoration: InputDecoration(
@@ -175,9 +179,9 @@ class _AuthScreenState extends State<AuthScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: TextField(
                     controller: passwordController,
                     decoration: InputDecoration(
@@ -189,31 +193,31 @@ class _AuthScreenState extends State<AuthScreen> {
                     obscureText: true,
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 SizedBox(
                   width: double.infinity,
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ElevatedButton(
                       onPressed: login,
-                      child: Text('Iniciar Sesión'),
+                      child: const Text('Iniciar Sesión'),
                     ),
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 TextButton(
                   onPressed: register,
-                  child: Text('¿No tienes una cuenta? Regístrate aquí.'),
+                  child: const Text('¿No tienes una cuenta? Regístrate aquí.'),
                 ),
                 buildSignInButtons(),
                 ElevatedButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
                     );
                   },
-                  child: Text('Ir a homescreen'),
+                  child: const Text('Ir a homescreen'),
                 ),
               ],
             ),
@@ -228,7 +232,7 @@ class _AuthScreenState extends State<AuthScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         buildGoogleSignInButton(),
-        SizedBox(width: 16.0),
+        const SizedBox(width: 16.0),
         buildFacebookSignInButton(),
       ],
     );
@@ -243,7 +247,7 @@ class _AuthScreenState extends State<AuthScreen> {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.all(0),
+          const EdgeInsets.all(0),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -256,7 +260,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Image.asset('assets/logogoogle.png', width: 24, height: 24),
       ),
     );
@@ -271,7 +275,7 @@ class _AuthScreenState extends State<AuthScreen> {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.all(0),
+          const EdgeInsets.all(0),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -284,7 +288,7 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Image.asset('assets/logofacebook.png', width: 24, height: 24),
       ),
     );
@@ -292,6 +296,8 @@ class _AuthScreenState extends State<AuthScreen> {
 }
 
 class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     TextEditingController registerEmailController = TextEditingController();
@@ -299,7 +305,7 @@ class RegisterScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registro'),
+        title: const Text('Registro'),
         centerTitle: true,
         elevation: 0,
       ),
@@ -308,7 +314,7 @@ class RegisterScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: registerEmailController,
                 decoration: InputDecoration(
@@ -319,9 +325,9 @@ class RegisterScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(16.0),
               child: TextField(
                 controller: registerPasswordController,
                 decoration: InputDecoration(
@@ -333,7 +339,7 @@ class RegisterScreen extends StatelessWidget {
                 obscureText: true,
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 final registerEmail = registerEmailController.text;
@@ -344,10 +350,10 @@ class RegisterScreen extends StatelessWidget {
                 };
                 Navigator.pop(context, result);
               },
-              child: Text('Registrarse'),
+              child: const Text('Registrarse'),
             ),
-            SizedBox(height: 16.0),
-            Text('O inicia sesión con:'),
+            const SizedBox(height: 16.0),
+            const Text('O inicia sesión con:'),
             buildSignInButtons(),
           ],
         ),
@@ -360,7 +366,7 @@ class RegisterScreen extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         buildGoogleSignInButton(),
-        SizedBox(width: 16.0),
+        const SizedBox(width: 16.0),
         buildFacebookSignInButton(),
       ],
     );
@@ -375,7 +381,7 @@ class RegisterScreen extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.all(0),
+          const EdgeInsets.all(0),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -388,7 +394,7 @@ class RegisterScreen extends StatelessWidget {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Image.asset('assets/logogoogle.png', width: 24, height: 24),
       ),
     );
@@ -401,7 +407,7 @@ class RegisterScreen extends StatelessWidget {
         backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
         elevation: MaterialStateProperty.all<double>(0),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          EdgeInsets.all(0),
+          const EdgeInsets.all(0),
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
@@ -414,7 +420,7 @@ class RegisterScreen extends StatelessWidget {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Image.asset('assets/logofacebook.png', width: 24, height: 24),
       ),
     );
@@ -422,13 +428,15 @@ class RegisterScreen extends StatelessWidget {
 }
 
 class homescreen extends StatelessWidget {
+  const homescreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: const Text('Home Screen'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Bienvenido a la pantalla de inicio'),
       ),
     );

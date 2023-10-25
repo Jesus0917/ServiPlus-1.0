@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: ProfileScreen(), // Establece ProfileScreen como la pantalla de inicio de la aplicación.
     );
   }
 }
 
 class ProfileScreen extends StatelessWidget {
+  const ProfileScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'), // Título de la barra de aplicación.
+        title: const Text('Perfil'), // Título de la barra de aplicación.
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -28,8 +32,8 @@ class ProfileScreen extends StatelessWidget {
 
             // Imagen de perfil del usuario.
             Container(
-              padding: EdgeInsets.all(16.0),
-              child: CircleAvatar(
+              padding: const EdgeInsets.all(16.0),
+              child: const CircleAvatar(
                 radius: 80.0,
                 backgroundImage: AssetImage('assets/profile_image.jpg'),
               ),
@@ -37,22 +41,22 @@ class ProfileScreen extends StatelessWidget {
 
             // Campos de entrada de texto para el perfil del usuario.
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Nombre',
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Teléfono',
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Precio',
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Descripción',
               ),
             ),
@@ -62,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () {
                 // Lógica para el botón de "Aceptar".
               },
-              child: Text('Aceptar'),
+              child: const Text('Aceptar'),
             ),
 
             // Fila de botones de acción.
@@ -73,25 +77,25 @@ class ProfileScreen extends StatelessWidget {
                   onPressed: () {
                     // Lógica para el botón "Llamar".
                   },
-                  child: Text('Llamar'),
+                  child: const Text('Llamar'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Lógica para el botón "Chat".
                   },
-                  child: Text('Chat'),
+                  child: const Text('Chat'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Lógica para el botón "Ofrecer".
                   },
-                  child: Text('Ofrecer'),
+                  child: const Text('Ofrecer'),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     // Lógica para el botón "Otros".
                   },
-                  child: Text('Otros'),
+                  child: const Text('Otros'),
                 ),
               ],
             ),

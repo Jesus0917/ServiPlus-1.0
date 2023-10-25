@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'login.dart';
 
 void main() {
-  runApp(MyApp()); // Inicia la aplicación Flutter creando una instancia de MyApp y la muestra en la pantalla.
+  runApp(const MyApp()); // Inicia la aplicación Flutter creando una instancia de MyApp y la muestra en la pantalla.
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     MaterialColor miMaterialColorPersonalizado = MaterialColor(
@@ -30,14 +32,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false, // Oculta la etiqueta de depuración en la esquina derecha superior.
       theme: ThemeData(
         primarySwatch: miMaterialColorPersonalizado, // Asigna el color personalizado como color principal de la aplicación.
-        appBarTheme: AppBarTheme(
+        appBarTheme: const AppBarTheme(
           backgroundColor: Colors.transparent, // Define el fondo de la barra de navegación como transparente.
         ),
       ),
       home:
-          AuthScreen(), // Esto inicia directamente en la pantalla de inicio de sesión al cargar la aplicación.
+          const AuthScreen(), // Esto inicia directamente en la pantalla de inicio de sesión al cargar la aplicación.
       routes: {
-        '/register': (context) => RegisterScreen(), // Define una ruta para la pantalla de registro.
+        '/register': (context) => const RegisterScreen(), // Define una ruta para la pantalla de registro.
       },
     );
   }
