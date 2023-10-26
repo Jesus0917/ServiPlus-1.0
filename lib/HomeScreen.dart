@@ -1,4 +1,5 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'WorkerProfileScreen.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -11,7 +12,8 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  _HomeScreenState createState() => _HomeScreenState(); // Crea una instancia de _HomeScreenState
+  _HomeScreenState createState() =>
+      _HomeScreenState(); // Crea una instancia de _HomeScreenState
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -28,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     // Puedes agregar más servicios aquí
   ];
 
-   int _currentIndex = 0;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +62,15 @@ class _HomeScreenState extends State<HomeScreen> {
             if (index == 0) {
               _navigateToHomeScreen();
             } else if (index == 1) {
-              _navigateToAccountScreen(context); // Pasamos el contexto a la pantalla de cuenta
+              _navigateToAccountScreen(
+                  context); // Pasamos el contexto a la pantalla de cuenta
             } else if (index == 2) {
               _navigateToSettingsScreen(context);
             }
           });
         },
 
-        //iconos barra inferior 
+        //iconos barra inferior
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -142,7 +145,8 @@ class ServiceCard extends StatelessWidget {
   final String serviceName;
   final String imagePath;
 
-  const ServiceCard({super.key, required this.serviceName, required this.imagePath});
+  const ServiceCard(
+      {super.key, required this.serviceName, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -193,12 +197,14 @@ class ServiceCard extends StatelessWidget {
     );
   }
 }
+
 class WorkerContainer extends StatelessWidget {
   final String name;
   final String price;
   final String imagePath;
 
-  const WorkerContainer({super.key, 
+  const WorkerContainer({
+    super.key,
     required this.name,
     required this.price,
     required this.imagePath,
@@ -340,7 +346,8 @@ class SettingsDialog extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Cerrar el diálogo de configuración
+                Navigator.of(context)
+                    .pop(); // Cerrar el diálogo de configuración
               },
               child: const Text('Cerrar'),
             ),
@@ -362,7 +369,23 @@ class SettingsDialog extends StatelessWidget {
   }
 }
 
+class WorkerProfileScreen extends StatelessWidget {
+  const WorkerProfileScreen({super.key, required this.serviceName});
 
+  final String serviceName;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Worker Profile'),
+      ),
+      body: Center(
+        child: Text('This is the worker profile screen'),
+      ),
+    );
+  }
+}
 
 class ListaTrabajadores extends StatelessWidget {
   final String serviceName;
@@ -398,58 +421,92 @@ class ListaTrabajadores extends StatelessWidget {
         ),
       ),
       backgroundColor: Colors.white,
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'Juan Pérez',
-                price: '\$20000/hora',
-                imagePath: 'assets/worker1.jpg',
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Juan Pérez')));
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Juan Pérez',
+                  price: '\$20000/hora',
+                  imagePath: 'assets/worker1.jpg',
+                ),
               ),
             ),
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'María López',
-                price: '\$18000/hora',
-                imagePath: 'assets/worker2.jpg',
+            GestureDetector(
+              onTap: () {
+                // Add the action you want to perform when this worker is tapped
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'María López',
+                  price: '\$18000/hora',
+                  imagePath: 'assets/worker2.jpg',
+                ),
               ),
             ),
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'Carlos Sánchez',
-                price: '\$25000/hora',
-                imagePath: 'assets/worker3.jpg',
+            GestureDetector(
+              onTap: () {
+                // Add the action you want to perform when this worker is tapped
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Carlos Sánchez',
+                  price: '\$25000/hora',
+                  imagePath: 'assets/worker3.jpg',
+                ),
               ),
             ),
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'Ana Martínez',
-                price: '\$22000/hora',
-                imagePath: 'assets/worker4.jpg',
+            GestureDetector(
+              onTap: () {
+                // Add the action you want to perform when this worker is tapped
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Ana Martínez',
+                  price: '\$22000/hora',
+                  imagePath: 'assets/worker4.jpg',
+                ),
               ),
             ),
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'Roberto Rodríguez',
-                price: '\$30000/hora',
-                imagePath: 'assets/worker5.jpg',
+            GestureDetector(
+              onTap: () {
+                // Add the action you want to perform when this worker is tapped
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Roberto Rodríguez',
+                  price: '\$30000/hora',
+                  imagePath: 'assets/worker5.jpg',
+                ),
               ),
             ),
-            SizedBox(
-              width: 500, // Ancho personalizado
-              child: WorkerContainer(
-                name: 'Sara Gómez',
-                price: '\$18000/hora',
-                imagePath: 'assets/worker6.jpg',
+            GestureDetector(
+              onTap: () {
+                // Add the action you want to perform when this worker is tapped
+              },
+              child: SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Sara Gómez',
+                  price: '\$18000/hora',
+                  imagePath: 'assets/worker6.jpg',
+                ),
               ),
             ),
-            // Agrega más contenedores aquí
+            // Add more contenedores aquí
           ],
         ),
       ),
@@ -459,9 +516,9 @@ class ListaTrabajadores extends StatelessWidget {
           if (index == 0) {
             Navigator.pop(context);
           } else if (index == 1) {
-            _navigateToAccountScreen(context);
+            // Implement navigation to the account screen here
           } else if (index == 2) {
-            _navigateToSettingsScreen(context);
+            // Implement navigation to the settings screen here
           }
         },
         items: const [
