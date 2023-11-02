@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "683084536873",
+    "firebase_url": "https://serviplus-bedd4-default-rtdb.firebaseio.com",
+    "project_id": "serviplus-bedd4",
+    "storage_bucket": "serviplus-bedd4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:683084536873:android:be02ed8a64bb1adc4b5038",
+        "android_client_info": {
+          "package_name": "com.ServiPlus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCK_0HnLL4nI2WIY6e-zy6pa4iQ58T52g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
