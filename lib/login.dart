@@ -83,8 +83,8 @@ class _AuthScreenState extends State<AuthScreen> {
           isLoggedIn = true;
         });
 
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()));
       } else {
         showDialog(
           context: context,
@@ -199,8 +199,17 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            miColorPersonalizado), // Utiliza tu color personalizado
+                      ),
                       onPressed: login,
-                      child: const Text('Iniciar Sesión'),
+                      child: Text(
+                        'Iniciar Sesión',
+                        style: TextStyle(
+                            color: Colors
+                                .white), // Cambia el color del texto a blanco
+                      ),
                     ),
                   ),
                 ),
@@ -214,10 +223,23 @@ class _AuthScreenState extends State<AuthScreen> {
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   },
-                  child: const Text('Ir a homescreen'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(miColorPersonalizado),
+                    textStyle: MaterialStateProperty.all<TextStyle>(TextStyle(
+                        color: Colors
+                            .white)), // Cambia el color del texto a blanco // Utiliza tu color personalizado
+                  ),
+                  child: Text(
+                    'Ir a HomeScreen',
+                    style: TextStyle(
+                        color:
+                            Colors.white), // Cambia el color del texto a blanco
+                  ),
                 ),
               ],
             ),
