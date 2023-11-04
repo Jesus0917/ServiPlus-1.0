@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'WorkerProfileScreen.dart';
-
+Color miColorPersonalizado = const Color(0xFF1F3DD0);
 void main() {
   runApp(const MaterialApp(
     home: HomeScreen(), // Inicia la aplicación con la pantalla HomeScreen
@@ -56,6 +56,8 @@ class _HomeScreenState extends State<HomeScreen> {
       body: _buildCurrentScreen(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        selectedItemColor: miColorPersonalizado, // Cambia el color de los botones seleccionados
+        unselectedItemColor: Colors.grey,
         onTap: (int index) {
           setState(() {
             _currentIndex = index;
