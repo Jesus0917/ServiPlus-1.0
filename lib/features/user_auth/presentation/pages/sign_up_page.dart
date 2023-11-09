@@ -135,7 +135,7 @@ setState(() {
     String email = _emailController.text;
     String password = _passwordController.text;
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+    User? user = await _auth.signUpWithEmailAndPassword(username, email, password);
 
 setState(() {
   isSigningUp = false;

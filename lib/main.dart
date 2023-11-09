@@ -12,8 +12,8 @@ import 'package:provider/provider.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
-    await Firebase.initializeApp(
-      options: FirebaseOptions(
+    Firebase.initializeApp(
+      options: const FirebaseOptions(
         apiKey: "AIzaSyDCK_0HnLL4nI2WIY6e-zy6pa4iQ58T52g",
         appId: "1:683084536873:android:be02ed8a64bb1adc4b5038",
         messagingSenderId: "683084536873",
@@ -62,15 +62,15 @@ class MyApp extends StatelessWidget {
             backgroundColor: Colors.transparent,
           ),
         ),
-        home: SplashScreen(
+        home: const SplashScreen(
           child: LoginPage(),
         ),
         routes: {
-          '/': (context) => SplashScreen(
+          '/': (context) => const SplashScreen(
             child: LoginPage(),
           ),
-          '/login': (context) => LoginPage(),
-          '/signUp': (context) => SignUpPage(),
+          '/login': (context) => const LoginPage(),
+          '/signUp': (context) => const SignUpPage(),
           '/home': (context) => HomePage(),
         },
       ),
