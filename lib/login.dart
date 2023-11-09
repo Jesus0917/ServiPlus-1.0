@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'features/user_auth/presentation/pages/home_page.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 
 Color miColorPersonalizado = const Color(0xFF1F3DD0);
 
