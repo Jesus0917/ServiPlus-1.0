@@ -27,7 +27,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: Text(
-          "Welcome To Flutter Firebase",
+          "Bienvenido a Serviplus",
           style: TextStyle(
             color: Colors.blue,
             fontWeight: FontWeight.bold,

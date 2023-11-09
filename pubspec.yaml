@@ -39,6 +39,9 @@ dependencies:
   image_picker:
   firebase_auth:
   fluttertoast:
+  cloud_firestore:
+  font_awesome_flutter:
+  google_sign_in:
   
 
 dev_dependencies:

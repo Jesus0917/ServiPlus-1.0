@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'WorkerProfileScreen.dart';
+import '../../../../WorkerProfileScreen.dart';
 Color miColorPersonalizado = const Color(0xFF1F3DD0);
 void main() {
   runApp(const MaterialApp(
-    home: HomeScreen(), // Inicia la aplicación con la pantalla HomeScreen
+    home: HomePage(), // Inicia la aplicación con la pantalla HomeScreen
     debugShowCheckedModeBanner: false, // Desactiva el banner de depuración
   ));
 }
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
   _HomeScreenState createState() =>
       _HomeScreenState(); // Crea una instancia de _HomeScreenState
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomePage> {
   // Define una lista de servicios con nombres e imágenes
   final List<Map<String, String>> services = [
     {'name': 'Plomero', 'image': 'assets/plomero.png'},
@@ -514,6 +514,8 @@ class ListaTrabajadores extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
+        selectedItemColor: miColorPersonalizado, // Cambia el color de los botones seleccionados
+        unselectedItemColor: Colors.grey,
         onTap: (int index) {
           if (index == 0) {
             Navigator.pop(context);

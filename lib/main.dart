@@ -1,8 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:flutter_application_1/features/user_auth/firebase_auth_implementation/firebase_auth_services.dart'; // Import Firebase Auth
+import 'package:flutter_application_1/features/app/splash_screen/splash_screen.dart';
+import 'package:flutter_application_1/features/user_auth/presentation/pages/home_page.dart';
+import 'package:flutter_application_1/features/user_auth/presentation/pages/login_page.dart';
+import 'package:flutter_application_1/features/user_auth/presentation/pages/sign_up_page.dart';
 
-void main() {
-  runApp(const MyApp()); // Inicia la aplicación Flutter creando una instancia de MyApp y la muestra en la pantalla.
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: FirebaseOptions(
+        apiKey: "AIzaSyDCK_0HnLL4nI2WIY6e-zy6pa4iQ58T52g",
+        appId: "1:683084536873:android:be02ed8a64bb1adc4b5038",
+        messagingSenderId: "683084536873",
+        projectId: "serviplus-bedd4",
+        // Your web Firebase config options
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -10,6 +30,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color miColorPersonalizado = Color(0xFF1F3DD0); // Define tu color personalizado aquí
+
     MaterialColor miMaterialColorPersonalizado = MaterialColor(
       0xFF1F3DD0, // Define un color personalizado que se usará como color principal de la aplicación.
       <int, Color>{
@@ -36,10 +58,18 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.transparent, // Define el fondo de la barra de navegación como transparente.
         ),
       ),
-      home:
-          const AuthScreen(), // Esto inicia directamente en la pantalla de inicio de sesión al cargar la aplicación.
+      home: SplashScreen(
+        // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
+        child: LoginPage(),
+      ),
       routes: {
-        '/register': (context) => const RegisterScreen(), // Define una ruta para la pantalla de registro.
+        '/': (context) => SplashScreen(
+          // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
+          child: LoginPage(),
+        ),
+        '/login': (context) => LoginPage(),
+        '/signUp': (context) => SignUpPage(),
+        '/home': (context) => HomePage(),
       },
     );
   }
