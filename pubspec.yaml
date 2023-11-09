@@ -42,6 +42,7 @@ dependencies:
   cloud_firestore:
   font_awesome_flutter:
   google_sign_in:
+  provider:
   
 
 dev_dependencies:

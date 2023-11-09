@@ -87,7 +87,7 @@ class _AuthScreenState extends State<AuthScreen> {
         });
 
         Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()));
+            MaterialPageRoute(builder: (context) => const HomePage()));
       } else {
         showDialog(
           context: context,
@@ -141,7 +141,7 @@ class _AuthScreenState extends State<AuthScreen> {
   @override
   Widget build(BuildContext context) {
     if (isLoggedIn) {
-      return const HomeScreen();
+      return const HomePage();
     } else {
       return Scaffold(
         appBar: PreferredSize(
@@ -227,7 +227,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
+                          builder: (context) => const HomePage()),
                     );
                   },
                   style: ButtonStyle(
