@@ -183,7 +183,6 @@ class _LoginPageState extends State<LoginPage> {
         );
 
         await _firebaseAuth.signInWithCredential(credential);
-        // ignore: use_build_context_synchronously
         Navigator.pushNamed(context, "/home");
       }
     } catch (e) {

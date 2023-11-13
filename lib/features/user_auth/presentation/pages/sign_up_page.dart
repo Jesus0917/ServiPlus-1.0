@@ -87,7 +87,6 @@ class _SignUpPageState extends State<SignUpPage> {
               GestureDetector(
                 onTap:  (){
                   _signUp();
-
                 },
                 child: Container(
                   width: double.infinity,
