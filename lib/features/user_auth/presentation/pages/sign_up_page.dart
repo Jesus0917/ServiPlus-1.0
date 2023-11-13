@@ -4,7 +4,7 @@ import 'package:flutter_application_1/features/user_auth/firebase_auth_implement
 import 'package:flutter_application_1/features/user_auth/presentation/pages/login_page.dart';
 import 'package:flutter_application_1/features/user_auth/presentation/widgets/form_container_widget.dart';
 import 'package:flutter_application_1/global/common/toast.dart';
-
+Color miColorPersonalizado = const Color(0xFF1F3DD0);
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
@@ -15,9 +15,9 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   final FirebaseAuthService _auth = FirebaseAuthService();
 
-  TextEditingController _usernameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   bool isSigningUp = false;
 
@@ -34,19 +34,30 @@ class _SignUpPageState extends State<SignUpPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("SignUp"),
+        title: const Center(
+          child: Text(
+            "Serviplus",
+            style: TextStyle(
+              fontSize: 32, // Increase font size
+              fontWeight: FontWeight.bold,
+              color: Colors.black, // Set the text color to black
+            ),
+          ),
+        ),
+        centerTitle: true,
+        elevation: 0,
       ),
-      body: Center(
+      body: SingleChildScrollView(
+      child: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                "Sign Up",
-                style: TextStyle(fontSize: 27, fontWeight: FontWeight.bold),
+              InkWell(
+                child: Image.asset('assets/logo.png', width: 200, height: 200),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               FormContainerWidget(
@@ -54,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Username",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -62,7 +73,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Email",
                 isPasswordField: false,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               FormContainerWidget(
@@ -70,7 +81,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 hintText: "Password",
                 isPasswordField: true,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               GestureDetector(
@@ -82,25 +93,25 @@ class _SignUpPageState extends State<SignUpPage> {
                   width: double.infinity,
                   height: 45,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: miColorPersonalizado,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Center(
-                      child: isSigningUp ? CircularProgressIndicator(color: Colors.white,):Text(
-                    "Sign Up",
+                      child: isSigningUp ? const CircularProgressIndicator(color: Colors.white,):const Text(
+                    "Registrarse",
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.bold),
                   )),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Already have an account?"),
-                  SizedBox(
+                  const Text("Already have an account?"),
+                  const SizedBox(
                     width: 5,
                   ),
                   GestureDetector(
@@ -108,13 +119,13 @@ class _SignUpPageState extends State<SignUpPage> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => LoginPage()),
+                                builder: (context) => const LoginPage()),
                             (route) => false);
                       },
-                      child: Text(
+                      child: const Text(
                         "Login",
                         style: TextStyle(
-                            color: Colors.blue, fontWeight: FontWeight.bold),
+                            color: Color(0xFF1F3DD0), fontWeight: FontWeight.bold),
                       ))
                 ],
               )
@@ -122,7 +133,7 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ),
       ),
-    );
+    ));
   }
 
   void _signUp() async {
