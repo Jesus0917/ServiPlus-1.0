@@ -1,4 +1,8 @@
+import 'dart:ui';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
 
 Color miColorPersonalizado = const Color(0xFF1F3DD0);
 void main() {
@@ -54,39 +58,42 @@ class _HomeScreenState extends State<HomePage> {
         ),
       ),
       body: _buildCurrentScreen(),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: miColorPersonalizado, // Cambia el color de los botones seleccionados
-        unselectedItemColor: Colors.grey,
-        onTap: (int index) {
-          setState(() {
-            _currentIndex = index;
-            if (index == 0) {
-              _navigateToHomeScreen();
-            } else if (index == 1) {
-              _navigateToAccountScreen(
-                  context); // Pasamos el contexto a la pantalla de cuenta
-            } else if (index == 2) {
-              _navigateToSettingsScreen(context);
-            }
-          });
-        },
-
-        //iconos barra inferior
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+      bottomNavigationBar: Container(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+          child: GNav(
+            activeColor: const Color(0xFF1F3DD0),
+            gap: 8,
+            tabBackgroundColor: Colors.white,
+            padding: const EdgeInsets.all(16),
+            tabs: const [
+              GButton(
+                icon: LineIcons.home,
+                text: 'Inicio',
+              ),
+              GButton(
+                icon: LineIcons.user,
+                text: 'Cuenta',
+              ),
+              GButton(
+                icon: LineIcons.wrench,
+                text: 'Ajustes',
+              ),
+            ],
+            onTabChange: (index) {
+              setState(() {
+                _currentIndex = index;
+                if (index == 0) {
+                  _navigateToHomeScreen();
+                } else if (index == 1) {
+                  _navigateToAccountScreen(context);
+                } else if (index == 2) {
+                  _navigateToSettingsScreen(context);
+                }
+              });
+            },
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_box),
-            label: 'Account',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -380,9 +387,9 @@ class WorkerProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Worker Profile'),
+        title: const Text('Worker Profile'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('This is the worker profile screen'),
       ),
     );
@@ -434,7 +441,7 @@ class ListaTrabajadores extends StatelessWidget {
                         builder: (context) => const WorkerProfileScreen(
                             serviceName: 'Juan Pérez')));
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Juan Pérez',
@@ -447,7 +454,7 @@ class ListaTrabajadores extends StatelessWidget {
               onTap: () {
                 // Add the action you want to perform when this worker is tapped
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'María López',
@@ -460,7 +467,7 @@ class ListaTrabajadores extends StatelessWidget {
               onTap: () {
                 // Add the action you want to perform when this worker is tapped
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Carlos Sánchez',
@@ -473,7 +480,7 @@ class ListaTrabajadores extends StatelessWidget {
               onTap: () {
                 // Add the action you want to perform when this worker is tapped
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Ana Martínez',
@@ -486,7 +493,7 @@ class ListaTrabajadores extends StatelessWidget {
               onTap: () {
                 // Add the action you want to perform when this worker is tapped
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Roberto Rodríguez',
@@ -499,7 +506,7 @@ class ListaTrabajadores extends StatelessWidget {
               onTap: () {
                 // Add the action you want to perform when this worker is tapped
               },
-              child: SizedBox(
+              child: const SizedBox(
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Sara Gómez',
@@ -512,33 +519,36 @@ class ListaTrabajadores extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        selectedItemColor: miColorPersonalizado, // Cambia el color de los botones seleccionados
-        unselectedItemColor: Colors.grey,
-        onTap: (int index) {
-          if (index == 0) {
-            Navigator.pop(context);
-          } else if (index == 1) {
-            // Implement navigation to the account screen here
-          } else if (index == 2) {
-            // Implement navigation to the settings screen here
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_box),
-            label: 'Account',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
+        child: GNav(
+          activeColor: const Color(0xFF1F3DD0),
+          gap: 8,
+          padding: const EdgeInsets.all(16),
+          tabs: const [
+            GButton(
+              icon: LineIcons.home,
+              text: 'Inicio',
+            ),
+            GButton(
+              icon: LineIcons.user,
+              text: 'Cuenta',
+            ),
+            GButton(
+              icon: LineIcons.wrench,
+              text: 'Ajustes',
+            ),
+          ],
+          onTabChange: (index) {
+            if (index == 0) {
+              Navigator.pop(context);
+            } else if (index == 1) {
+              // Implement navigation to the account screen here
+            } else if (index == 2) {
+              // Implement navigation to the settings screen here
+            }
+          },
+        ),
       ),
     );
   }
