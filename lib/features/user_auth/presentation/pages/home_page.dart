@@ -22,7 +22,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomePage> {
-  // Define una lista de servicios con nombres e imágenes
+  String title = 'Serviplus';
   final List<Map<String, String>> services = [
     {'name': 'Plomero', 'image': 'assets/plomero.png'},
     {'name': 'Aseador', 'image': 'assets/limpiador.png'},
@@ -87,10 +87,13 @@ class _HomeScreenState extends State<HomePage> {
                 _currentIndex = index;
                 if (index == 0) {
                   _navigateToHomeScreen();
+                  title = 'Serviplus'; // Actualiza el título al regresar a la página de inicio
                 } else if (index == 1) {
                   _navigateToAccountScreen(context);
+                  title = 'Cuenta'; // Actualiza el título al ir a la página de cuenta
                 } else if (index == 2) {
                   _navigateToSettingsScreen(context);
+                  title = 'Ajustes'; // Puedes cambiar esto según tus necesidades
                 }
               });
             },
@@ -136,7 +139,7 @@ class _HomeScreenState extends State<HomePage> {
     showDialog(
       context: context,
       builder: (context) {
-        return const AccountDialog();
+        return const AboutDialog();
       },
     );
   }
@@ -276,55 +279,29 @@ class AccountScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          'Información de la cuenta',
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
+      return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent),
           ),
         ),
-        // Agrega más widgets para mostrar información de la cuenta
-      ],
-    );
-  }
-}
-
-class AccountDialog extends StatelessWidget {
-  const AccountDialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text(
-              'Información de la cuenta',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white.withAlpha(200),
+        elevation: 0,
+        title: const Center(
+          child: Text(
+            'Cuenta',
+            style: TextStyle(
+              fontSize: 27.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
-            // Agrega más widgets para mostrar información de la cuenta
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Cerrar el diálogo de cuenta
-              },
-              child: const Text('Cerrar'),
-            ),
-          ],
+          ),
         ),
       ),
-    );
+    );  
   }
 }
 
@@ -416,7 +393,7 @@ class ListaTrabajadores extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        return const AccountDialog();
+        return const AccountScreen();
       },
     );
   }
