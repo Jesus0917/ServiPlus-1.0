@@ -62,9 +62,10 @@ class _HomeScreenState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
           child: GNav(
-            activeColor: const Color(0xFF1F3DD0),
+            backgroundColor: Colors.white,
+            activeColor: Colors.white,
             gap: 8,
-            tabBackgroundColor: Colors.white,
+            tabBackgroundColor: const Color(0xFF1F3DD0),
             padding: const EdgeInsets.all(16),
             tabs: const [
               GButton(
@@ -401,14 +402,22 @@ class ListaTrabajadores extends StatelessWidget {
 
   const ListaTrabajadores(this.serviceName, {super.key});
 
-  final int _currentIndex = 0;
-
   void _navigateToSettingsScreen(BuildContext context) {
-    // Navegar a la pantalla de Settings (falta implementar)
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const SettingsDialog();
+      },
+    );
   }
 
   void _navigateToAccountScreen(BuildContext context) {
-    // Navegar a la pantalla de Account (falta implementar)
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AccountDialog();
+      },
+    );
   }
 
   @override
@@ -522,8 +531,10 @@ class ListaTrabajadores extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
         child: GNav(
-          activeColor: const Color(0xFF1F3DD0),
+          backgroundColor: Colors.white,
+          activeColor: Colors.white,
           gap: 8,
+          tabBackgroundColor: const Color(0xFF1F3DD0),
           padding: const EdgeInsets.all(16),
           tabs: const [
             GButton(
@@ -543,9 +554,9 @@ class ListaTrabajadores extends StatelessWidget {
             if (index == 0) {
               Navigator.pop(context);
             } else if (index == 1) {
-              // Implement navigation to the account screen here
+              _navigateToAccountScreen(context);
             } else if (index == 2) {
-              // Implement navigation to the settings screen here
+              _navigateToSettingsScreen(context);
             }
           },
         ),
