@@ -40,24 +40,6 @@ class _HomeScreenState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(60.0),
-        child: AppBar(
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: const Center(
-            child: Text(
-              'Servicios',
-              style: TextStyle(
-                fontSize: 27.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ),
-      ),
       body: _buildCurrentScreen(),
       bottomNavigationBar: Container(
         child: Padding(
@@ -231,7 +213,6 @@ class WorkerContainer extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -254,7 +235,7 @@ class WorkerContainer extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 3.0),
           Text(
             name,
             style: const TextStyle(
@@ -280,27 +261,7 @@ class AccountScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
       return Scaffold(
-      appBar: AppBar(
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: Colors.transparent),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white.withAlpha(200),
-        elevation: 0,
-        title: const Center(
-          child: Text(
-            'Cuenta',
-            style: TextStyle(
-              fontSize: 27.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ),
+
     );  
   }
 }
@@ -310,38 +271,8 @@ class SettingsDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text(
-              'Configuración',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(height: 20),
-            _buildSettingItem('Notificaciones', Icons.notifications),
-            _buildSettingItem('Privacidad', Icons.lock),
-            _buildSettingItem('Preferencias', Icons.settings),
-            _buildSettingItem('Acerca de', Icons.info),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Cerrar el diálogo de configuración
-              },
-              child: const Text('Cerrar'),
-            ),
-          ],
-        ),
-      ),
+    return Scaffold(
+      
     );
   }
 
