@@ -106,7 +106,12 @@ class _HomeScreenState extends State<HomePage> {
         child: AccountScreen(),
       );
     } else {
-      return Container();
+      return Center(
+        child: SettingsScreen(
+          notificationsEnabled: notificationsEnabled,
+          onNotificationToggle: _toggleNotifications,
+        ),
+      );
     }
   }
 
@@ -315,8 +320,8 @@ class AccountScreen extends StatelessWidget {
           } else {
             String username = snapshot.data?['username'] ?? 'Nombre de Usuario';
             String email = snapshot.data?['email'] ?? 'correo@example.com';
-            String profileImageUrl =
-                snapshot.data?['profileImage'] ?? 'URL_DE_LA_IMAGEN_POR_DEFECTO';
+            String profileImageUrl = snapshot.data?['profileImage'] ??
+                'URL_DE_LA_IMAGEN_POR_DEFECTO';
 
             return Center(
               child: Column(
@@ -326,11 +331,11 @@ class AccountScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: profileImageUrl !=
-                            'URL_DE_LA_IMAGEN_POR_DEFECTO'
-                        ? NetworkImage(profileImageUrl)
-                        : AssetImage('assets/usuario-de-perfil.png')
-                            as ImageProvider,
+                    backgroundImage:
+                        profileImageUrl != 'URL_DE_LA_IMAGEN_POR_DEFECTO'
+                            ? NetworkImage(profileImageUrl)
+                            : AssetImage('assets/usuario-de-perfil.png')
+                                as ImageProvider,
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -357,14 +362,15 @@ class SettingsScreen extends StatelessWidget {
   final Function(bool) onNotificationToggle;
 
   const SettingsScreen({
-    super.key,
+    Key? key,
     required this.notificationsEnabled,
     required this.onNotificationToggle,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         flexibleSpace: ClipRect(
           child: BackdropFilter(
@@ -375,37 +381,54 @@ class SettingsScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white.withAlpha(200),
         elevation: 0,
-        title: const Center(
-          child: Text(
-            'Configuracion',
-            style: TextStyle(
-              fontSize: 27.0,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-        ),
-      ),
-      body: Center(
-        child: Column(
+        title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // ... Otros widgets
-
-            // Botón para activar/desactivar notificaciones
-            ElevatedButton(
-              onPressed: () {
-                onNotificationToggle(!notificationsEnabled);
-              },
-              child: Text(
-                notificationsEnabled
-                    ? 'Desactivar Notificaciones'
-                    : 'Activar Notificaciones',
+            const SizedBox(width: 10.0),
+            Text(
+              'Ajustes',
+              style: TextStyle(
+                fontSize: 27.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
             ),
           ],
         ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          // ... Other widgets
+
+          // Switch to toggle notifications
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Icon(
+                Icons.notifications,
+                color: Color(0xFF1F3DD0),
+              ),
+              Text(
+                'Notificaciones:',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(width: 20.0),
+              Switch(
+                value: notificationsEnabled,
+                onChanged: (newValue) {
+                  onNotificationToggle(newValue);
+                },
+                activeColor: Color(0xFF1F3DD0),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

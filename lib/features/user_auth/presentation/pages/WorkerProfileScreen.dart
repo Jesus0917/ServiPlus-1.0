@@ -47,8 +47,62 @@ class WorkerProfileScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: const Center(
-        child: Text('This is the worker profile screen'),
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              // Circular space for profile picture
+              CircleAvatar(
+                radius: 50.0,
+                backgroundImage: NetworkImage('https://picsum.photos/200/300'),
+              ),
+              const SizedBox(height: 20.0),
+
+              // Worker's name
+              Text(
+                'Nombre: Juan Pérez',
+                style: TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+
+              // Worker's profession
+              Text(
+                'Profesión: Plomero',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+
+              // Worker's phone number
+              Text(
+                'Número de teléfono: +57 3113489344',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  color: Colors.grey,
+                ),
+              ),
+              const SizedBox(height: 10.0),
+
+              // Worker's price
+              Text(
+                'Precio x Hora: \$15.000',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(height: 20.0),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -69,7 +69,11 @@ class ListaTrabajadores extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Add the action you want to perform when this worker is tapped
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'María López')));
               },
               child: const SizedBox(
                 width: 500, // Ancho personalizado
@@ -82,7 +86,11 @@ class ListaTrabajadores extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Add the action you want to perform when this worker is tapped
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Carlos Sánchez')));
               },
               child: const SizedBox(
                 width: 500, // Ancho personalizado
@@ -95,7 +103,11 @@ class ListaTrabajadores extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Add the action you want to perform when this worker is tapped
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Ana Martínez')));
               },
               child: const SizedBox(
                 width: 500, // Ancho personalizado
@@ -108,7 +120,11 @@ class ListaTrabajadores extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Add the action you want to perform when this worker is tapped
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Roberto Rodríguez')));
               },
               child: const SizedBox(
                 width: 500, // Ancho personalizado
@@ -121,7 +137,11 @@ class ListaTrabajadores extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                // Add the action you want to perform when this worker is tapped
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Sara Gómez')));
               },
               child: const SizedBox(
                 width: 500, // Ancho personalizado
