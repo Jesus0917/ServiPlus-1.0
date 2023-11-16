@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/user_auth/presentation/pages/home_page.dart';
 
@@ -16,92 +18,37 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class WorkerProfileScreen extends StatelessWidget {
+  const WorkerProfileScreen({super.key, required this.serviceName});
+
+  final String serviceName;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Perfil'), // Título de la barra de aplicación.
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            // Contenido del perfil del usuario.
-
-            // Imagen de perfil del usuario.
-            Container(
-              padding: const EdgeInsets.all(16.0),
-              child: const CircleAvatar(
-                radius: 80.0,
-                backgroundImage: AssetImage('assets/profile_image.jpg'),
-              ),
-            ),
-
-            // Campos de entrada de texto para el perfil del usuario.
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Nombre',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Teléfono',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Precio',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Descripción',
-              ),
-            ),
-
-            // Botón "Aceptar" (debe proporcionarse la lógica).
-            ElevatedButton(
-              onPressed: () {
-                // Lógica para el botón de "Aceptar".
-              },
-              child: const Text('Aceptar'),
-            ),
-
-            // Fila de botones de acción.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para el botón "Llamar".
-                  },
-                  child: const Text('Llamar'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para el botón "Chat".
-                  },
-                  child: const Text('Chat'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para el botón "Ofrecer".
-                  },
-                  child: const Text('Ofrecer'),
-                ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Lógica para el botón "Otros".
-                  },
-                  child: const Text('Otros'),
-                ),
-              ],
-            ),
-          ],
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent),
+          ),
         ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white.withAlpha(200),
+        elevation: 0,
+        title: const Center(
+          child: Text(
+            'Perfil Del Trabajador',
+            style: TextStyle(
+              fontSize: 27.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
+      ),
+      body: const Center(
+        child: Text('This is the worker profile screen'),
       ),
     );
   }
