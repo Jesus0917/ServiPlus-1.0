@@ -155,14 +155,13 @@ class ServiceCard extends StatelessWidget {
           child: Container(
             height: 120,
             width: double.infinity,
-            color: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   imagePath,
                   fit: BoxFit.contain,
-                  height: 40,
+                  height: 60,
                 ),
                 const SizedBox(height: 5.0),
                 Padding(
