@@ -46,7 +46,6 @@ class _HomeScreenState extends State<HomePage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
           child: GNav(
-            backgroundColor: Colors.white,
             activeColor: Colors.white,
             gap: 8,
             tabBackgroundColor: const Color(0xFF1F3DD0),
