@@ -1,5 +1,4 @@
 import 'dart:ui';
-import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +7,19 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
 Color miColorPersonalizado = const Color(0xFF1F3DD0);
+
 void main() {
   runApp(const MaterialApp(
-    home: HomePage(), // Inicia la aplicación con la pantalla HomeScreen
-    debugShowCheckedModeBanner: false, // Desactiva el banner de depuración
+    home: HomePage(),
+    debugShowCheckedModeBanner: false,
   ));
 }
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() =>
-      _HomeScreenState(); // Crea una instancia de _HomeScreenState
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomePage> {
@@ -34,10 +33,10 @@ class _HomeScreenState extends State<HomePage> {
     {'name': 'Paseador', 'image': 'assets/caminando-con-perro.png'},
     {'name': 'Cocinero', 'image': 'assets/cocinero.png'},
     {'name': 'Lavanderia', 'image': 'assets/servicio-de-lavanderia.png'},
-    // Puedes agregar más servicios aquí
   ];
 
   int _currentIndex = 0;
+  bool notificationsEnabled = true;
 
   @override
   Widget build(BuildContext context) {
@@ -70,16 +69,13 @@ class _HomeScreenState extends State<HomePage> {
                 _currentIndex = index;
                 if (index == 0) {
                   _navigateToHomeScreen();
-                  title =
-                      'Serviplus'; // Actualiza el título al regresar a la página de inicio
+                  title = 'Serviplus';
                 } else if (index == 1) {
                   _navigateToAccountScreen(context);
-                  title =
-                      'Cuenta'; // Actualiza el título al ir a la página de cuenta
+                  title = 'Cuenta';
                 } else if (index == 2) {
                   _navigateToSettingsScreen(context);
-                  title =
-                      'Ajustes'; // Puedes cambiar esto según tus necesidades
+                  title = 'Ajustes';
                 }
               });
             },
@@ -89,7 +85,6 @@ class _HomeScreenState extends State<HomePage> {
     );
   }
 
-  // Método para construir la pantalla actual
   Widget _buildCurrentScreen() {
     if (_currentIndex == 0) {
       return GridView.builder(
@@ -108,31 +103,35 @@ class _HomeScreenState extends State<HomePage> {
       );
     } else if (_currentIndex == 1) {
       return const Center(
-        child: AccountScreen(), // Mostrar la pantalla de cuenta
+        child: AccountScreen(),
       );
     } else {
       return Container();
     }
   }
 
-  // Método para navegar a la página de inicio (Home)
-  void _navigateToHomeScreen() {
-    // Implementar la navegación a la página de inicio (Home) si es necesario
-  }
+  void _navigateToHomeScreen() {}
 
-  // Método para mostrar la pantalla de cuenta como un diálogo
   void _navigateToAccountScreen(BuildContext context) {}
 
-  // Método para mostrar la pantalla de configuración como un diálogo
   void _navigateToSettingsScreen(BuildContext context) {}
+
+  void _toggleNotifications(bool newStatus) {
+    setState(() {
+      notificationsEnabled = newStatus;
+    });
+  }
 }
 
 class ServiceCard extends StatelessWidget {
   final String serviceName;
   final String imagePath;
 
-  const ServiceCard(
-      {super.key, required this.serviceName, required this.imagePath});
+  const ServiceCard({
+    Key? key,
+    required this.serviceName,
+    required this.imagePath,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -189,11 +188,11 @@ class WorkerContainer extends StatelessWidget {
   final String imagePath;
 
   const WorkerContainer({
-    super.key,
+    Key? key,
     required this.name,
     required this.price,
     required this.imagePath,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -252,7 +251,6 @@ class AccountScreen extends StatelessWidget {
     try {
       User? user = FirebaseAuth.instance.currentUser;
       if (user != null) {
-        // Use Firebase Storage to get the profile image URL
         String profileImageUrl = await getProfileImageUrl(user.email!);
 
         return {
@@ -317,7 +315,8 @@ class AccountScreen extends StatelessWidget {
           } else {
             String username = snapshot.data?['username'] ?? 'Nombre de Usuario';
             String email = snapshot.data?['email'] ?? 'correo@example.com';
-            String profileImageUrl = snapshot.data?['profileImage'] ?? 'URL_DE_LA_IMAGEN_POR_DEFECTO';
+            String profileImageUrl =
+                snapshot.data?['profileImage'] ?? 'URL_DE_LA_IMAGEN_POR_DEFECTO';
 
             return Center(
               child: Column(
@@ -327,9 +326,11 @@ class AccountScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   CircleAvatar(
                     radius: 50,
-                    backgroundImage: profileImageUrl != 'URL_DE_LA_IMAGEN_POR_DEFECTO'
+                    backgroundImage: profileImageUrl !=
+                            'URL_DE_LA_IMAGEN_POR_DEFECTO'
                         ? NetworkImage(profileImageUrl)
-                        : AssetImage('assets/usuario-de-perfil.png') as ImageProvider,
+                        : AssetImage('assets/usuario-de-perfil.png')
+                            as ImageProvider,
                   ),
                   const SizedBox(height: 20),
                   Text(
@@ -352,53 +353,60 @@ class AccountScreen extends StatelessWidget {
 }
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  final bool notificationsEnabled;
+  final Function(bool) onNotificationToggle;
+
+  const SettingsScreen({
+    super.key,
+    required this.notificationsEnabled,
+    required this.onNotificationToggle,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Container(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            const Text(
-              'Configuración',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        flexibleSpace: ClipRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+            child: Container(color: Colors.transparent),
+          ),
+        ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white.withAlpha(200),
+        elevation: 0,
+        title: const Center(
+          child: Text(
+            'Configuracion',
+            style: TextStyle(
+              fontSize: 27.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
-            const SizedBox(height: 20),
-            _buildSettingItem('Notificaciones', Icons.notifications),
-            _buildSettingItem('Privacidad', Icons.lock),
-            _buildSettingItem('Preferencias', Icons.settings),
-            _buildSettingItem('Acerca de', Icons.info),
-            const SizedBox(height: 20),
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // ... Otros widgets
+
+            // Botón para activar/desactivar notificaciones
             ElevatedButton(
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // Cerrar el diálogo de configuración
+                onNotificationToggle(!notificationsEnabled);
               },
-              child: const Text('Cerrar'),
+              child: Text(
+                notificationsEnabled
+                    ? 'Desactivar Notificaciones'
+                    : 'Activar Notificaciones',
+              ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  // Método para construir un elemento de configuración
-  Widget _buildSettingItem(String label, IconData icon) {
-    return ListTile(
-      leading: Icon(icon),
-      title: Text(label),
-      onTap: () {
-        // Implementar acciones para cada elemento de configuración si es necesario
-      },
     );
   }
 }
