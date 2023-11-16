@@ -1,6 +1,7 @@
 import 'dart:ui';
-// ignore: unused_import
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
@@ -69,13 +70,16 @@ class _HomeScreenState extends State<HomePage> {
                 _currentIndex = index;
                 if (index == 0) {
                   _navigateToHomeScreen();
-                  title = 'Serviplus'; // Actualiza el título al regresar a la página de inicio
+                  title =
+                      'Serviplus'; // Actualiza el título al regresar a la página de inicio
                 } else if (index == 1) {
                   _navigateToAccountScreen(context);
-                  title = 'Cuenta'; // Actualiza el título al ir a la página de cuenta
+                  title =
+                      'Cuenta'; // Actualiza el título al ir a la página de cuenta
                 } else if (index == 2) {
                   _navigateToSettingsScreen(context);
-                  title = 'Ajustes'; // Puedes cambiar esto según tus necesidades
+                  title =
+                      'Ajustes'; // Puedes cambiar esto según tus necesidades
                 }
               });
             },
@@ -117,12 +121,10 @@ class _HomeScreenState extends State<HomePage> {
   }
 
   // Método para mostrar la pantalla de cuenta como un diálogo
-  void _navigateToAccountScreen(BuildContext context) {
-  }
+  void _navigateToAccountScreen(BuildContext context) {}
 
   // Método para mostrar la pantalla de configuración como un diálogo
-  void _navigateToSettingsScreen(BuildContext context) {
-  }
+  void _navigateToSettingsScreen(BuildContext context) {}
 }
 
 class ServiceCard extends StatelessWidget {
@@ -245,11 +247,46 @@ class WorkerContainer extends StatelessWidget {
 }
 
 class AccountScreen extends StatelessWidget {
-  const AccountScreen({super.key});
+  const AccountScreen({Key? key});
+
+  Future<Map<String, dynamic>> getUserData() async {
+    try {
+      User? user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        // Use Firebase Storage to get the profile image URL
+        String profileImageUrl = await getProfileImageUrl(user.email!);
+
+        return {
+          'username': 'Nombre de Usuario',
+          'email': user.email ?? 'correo@example.com',
+          'profileImage': profileImageUrl,
+        };
+      }
+    } catch (error) {
+      print('Error getting user data: $error');
+    }
+
+    return {
+      'username': 'Nombre de Usuario',
+      'email': 'correo@example.com',
+      'profileImage': 'URL_DE_LA_IMAGEN_POR_DEFECTO',
+    };
+  }
+
+  Future<String> getProfileImageUrl(String userEmail) async {
+    try {
+      final storage = FirebaseStorage.instance;
+      final ref = storage.ref().child('profile_images/$userEmail.jpg');
+      return await ref.getDownloadURL();
+    } catch (error) {
+      print('Error getting profile image URL: $error');
+      return 'URL_DE_LA_IMAGEN_POR_DEFECTO';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-      return Scaffold(
+    return Scaffold(
       appBar: AppBar(
         flexibleSpace: ClipRect(
           child: BackdropFilter(
@@ -271,7 +308,47 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-    );  
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: getUserData(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else {
+            String username = snapshot.data?['username'] ?? 'Nombre de Usuario';
+            String email = snapshot.data?['email'] ?? 'correo@example.com';
+            String profileImageUrl = snapshot.data?['profileImage'] ?? 'URL_DE_LA_IMAGEN_POR_DEFECTO';
+
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(height: 20),
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: profileImageUrl != 'URL_DE_LA_IMAGEN_POR_DEFECTO'
+                        ? NetworkImage(profileImageUrl)
+                        : AssetImage('assets/usuario-de-perfil.png') as ImageProvider,
+                  ),
+                  const SizedBox(height: 20),
+                  Text(
+                    'Usuario: $username',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'Correo: $email',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                ],
+              ),
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -350,11 +427,9 @@ class ListaTrabajadores extends StatelessWidget {
 
   const ListaTrabajadores(this.serviceName, {super.key});
 
-  void _navigateToSettingsScreen(BuildContext context) {
-  }
+  void _navigateToSettingsScreen(BuildContext context) {}
 
-  void _navigateToAccountScreen(BuildContext context) {
-  }
+  void _navigateToAccountScreen(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
