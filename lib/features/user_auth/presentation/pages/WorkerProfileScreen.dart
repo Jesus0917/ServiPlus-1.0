@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/user_auth/presentation/pages/home_page.dart';
 
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
 }
 
 class WorkerProfileScreen extends StatelessWidget {
-  const WorkerProfileScreen({super.key, required this.serviceName});
+  const WorkerProfileScreen({Key? key, required this.serviceName}) : super(key: key);
 
   final String serviceName;
 
@@ -27,20 +26,14 @@ class WorkerProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        flexibleSpace: ClipRect(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-            child: Container(color: Colors.transparent),
-          ),
-        ),
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.white.withAlpha(200),
+         automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Center(
           child: Text(
-            'Perfil Del Trabajador',
+            'Trabajador',
             style: TextStyle(
-              fontSize: 27.0,
+              fontSize: 20.0,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -52,56 +45,60 @@ class WorkerProfileScreen extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: Column(
             children: [
-              // Circular space for profile picture
-              CircleAvatar(
-                radius: 50.0,
-                backgroundImage: NetworkImage('https://picsum.photos/200/300'),
-              ),
-              const SizedBox(height: 20.0),
-
-              // Worker's name
               Text(
-                'Nombre: Juan Pérez',
-                style: TextStyle(
+                'Nombre: $serviceName',
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
               ),
-              const SizedBox(height: 10.0),
-
-              // Worker's profession
-              Text(
-                'Profesión: Plomero',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 10.0),
-
-              // Worker's phone number
-              Text(
-                'Número de teléfono: +57 3113489344',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 10.0),
-
-              // Worker's price
-              Text(
-                'Precio x Hora: \$15.000',
-                style: TextStyle(
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(height: 20.0),
+              // ... otros widgets en el perfil del trabajador
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class ListaTrabajadores extends StatelessWidget {
+  final List<Map<String, String>> workers;
+
+  const ListaTrabajadores(this.workers, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        // ... otras configuraciones de la barra de aplicaciones
+      ),
+      backgroundColor: Colors.white,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            for (int index = 0; index < workers.length; index++)
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WorkerProfileScreen(
+                        serviceName: workers[index]['name'] ?? '',
+                      ),
+                    ),
+                  );
+                },
+                child: SizedBox(
+                  width: 500,
+                  child: WorkerContainer(
+                    name: workers[index]['name'] ?? '',
+                    price: workers[index]['price'] ?? '',
+                    imagePath: workers[index]['imagePath'] ?? '',
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );

@@ -20,9 +20,10 @@ class MyApp extends StatelessWidget {
 }
 
 class ListaTrabajadores extends StatelessWidget {
+  final List<Map<String, String>> workers;
   final String serviceName;
 
-  const ListaTrabajadores(this.serviceName, {super.key});
+  const ListaTrabajadores(this.workers, {super.key, required this.serviceName});
 
   void _navigateToSettingsScreen(BuildContext context) {}
 
@@ -62,8 +63,8 @@ class ListaTrabajadores extends StatelessWidget {
                 width: 500, // Ancho personalizado
                 child: WorkerContainer(
                   name: 'Juan Pérez',
-                  price: '\$20000/hora',
-                  imagePath: 'assets/worker1.jpg',
+                  price: '\$20000/hora', 
+                  imagePath: '',
                 ),
               ),
             ),
@@ -80,7 +81,7 @@ class ListaTrabajadores extends StatelessWidget {
                 child: WorkerContainer(
                   name: 'María López',
                   price: '\$18000/hora',
-                  imagePath: 'assets/worker2.jpg',
+                  imagePath: '',
                 ),
               ),
             ),
@@ -97,7 +98,7 @@ class ListaTrabajadores extends StatelessWidget {
                 child: WorkerContainer(
                   name: 'Carlos Sánchez',
                   price: '\$25000/hora',
-                  imagePath: 'assets/worker3.jpg',
+                  imagePath: '',
                 ),
               ),
             ),
@@ -114,7 +115,7 @@ class ListaTrabajadores extends StatelessWidget {
                 child: WorkerContainer(
                   name: 'Ana Martínez',
                   price: '\$22000/hora',
-                  imagePath: 'assets/worker4.jpg',
+                  imagePath: '',
                 ),
               ),
             ),
@@ -131,7 +132,7 @@ class ListaTrabajadores extends StatelessWidget {
                 child: WorkerContainer(
                   name: 'Roberto Rodríguez',
                   price: '\$30000/hora',
-                  imagePath: 'assets/worker5.jpg',
+                  imagePath: '',
                 ),
               ),
             ),
@@ -148,7 +149,7 @@ class ListaTrabajadores extends StatelessWidget {
                 child: WorkerContainer(
                   name: 'Sara Gómez',
                   price: '\$18000/hora',
-                  imagePath: 'assets/worker6.jpg',
+                  imagePath: '',
                 ),
               ),
             ),

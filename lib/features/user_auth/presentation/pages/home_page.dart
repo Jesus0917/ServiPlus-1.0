@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomePage> {
         itemBuilder: (context, index) {
           return ServiceCard(
             serviceName: services[index]['name'] ?? '',
-            imagePath: services[index]['image'] ?? '',
+            imagePath: services[index]['image'] ?? '', workers: [],
           );
         },
       );
@@ -131,11 +131,13 @@ class _HomeScreenState extends State<HomePage> {
 class ServiceCard extends StatelessWidget {
   final String serviceName;
   final String imagePath;
+  final List<Map<String, String>> workers;
 
   const ServiceCard({
     Key? key,
     required this.serviceName,
     required this.imagePath,
+    required this.workers,
   }) : super(key: key);
 
   @override
@@ -152,7 +154,7 @@ class ServiceCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => ListaTrabajadores(serviceName),
+                builder: (context) => ListaTrabajadores(workers, serviceName: '',),
               ),
             );
           },
