@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/user_auth/presentation/pages/list_workers.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -108,8 +109,12 @@ class _HomeScreenState extends State<HomePage> {
     } else {
       return Center(
         child: SettingsScreen(
-          notificationsEnabled: notificationsEnabled,
-          onNotificationToggle: _toggleNotifications,
+          valNotify1: notificationsEnabled,
+          valNotify2: false,
+          valNotify3: false,
+          onChanged1: _toggleNotifications,
+          onChanged2: (value) {},
+          onChanged3: (value) {},
         ),
       );
     }
@@ -357,20 +362,54 @@ class AccountScreen extends StatelessWidget {
   }
 }
 
-class SettingsScreen extends StatelessWidget {
-  final bool notificationsEnabled;
-  final Function(bool) onNotificationToggle;
-
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
     Key? key,
-    required this.notificationsEnabled,
-    required this.onNotificationToggle,
+    required this.valNotify1,
+    required this.valNotify2,
+    required this.valNotify3,
+    required this.onChanged1,
+    required this.onChanged2,
+    required this.onChanged3,
   }) : super(key: key);
+
+  final bool valNotify1;
+  final bool valNotify2;
+  final bool valNotify3;
+  final Function(bool) onChanged1;
+  final Function(bool) onChanged2;
+  final Function(bool) onChanged3;
+
+  @override
+  _SettingsScreenState createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen> {
+  bool valNotify1 = true;
+  bool valNotify2 = false;
+  bool valNotify3 = false;
+
+  void onChangeFunction1(bool newValue1) {
+    setState(() {
+      valNotify1 = newValue1;
+    });
+  }
+
+  void onChangeFunction2(bool newValue2) {
+    setState(() {
+      valNotify2 = newValue2;
+    });
+  }
+
+  void onChangeFunction3(bool newValue3) {
+    setState(() {
+      valNotify3 = newValue3;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         flexibleSpace: ClipRect(
           child: BackdropFilter(
@@ -381,55 +420,142 @@ class SettingsScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white.withAlpha(200),
         elevation: 0,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(width: 10.0),
-            Text(
-              'Ajustes',
-              style: TextStyle(
-                fontSize: 27.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+        title: const Center(
+          child: Text(
+            'Configuracion',
+            style: TextStyle(
+              fontSize: 27.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
+          ),
+        ),
+      ),
+      body: Container(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
+          children: [
+            SizedBox(height: 40,),
+            Row(
+              children: [
+                Icon(
+                  Icons.person,
+                  color: Color(0xFF1F3DD0),
+                ),
+                SizedBox(width: 10,),
+                Text("Cuenta", style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),)
+              ],
+            ),
+            Divider(height: 20,thickness: 1),
+            SizedBox(height: 10),
+            buildAccountOpion(context, "Cambiar Contraseña"),
+            buildAccountOpion(context, "Configuracion de contenido"),
+            buildAccountOpion(context, "Social"),
+            buildAccountOpion(context, "Language"),
+            buildAccountOpion(context, "Privacidad y Seguridad"),
+            SizedBox(height: 40),
+            Row(
+              children: [
+                Icon(Icons.volume_up_outlined, color: Color(0xFF1F3DD0)),
+                SizedBox(width: 10),
+                Text("Notificaciones", style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold
+                ),)
+              ],
+            ),
+            Divider(height: 20, thickness: 1),
+            SizedBox(height: 10),
+            buildNotificationOpntion("Tema Oscuro", valNotify1, onChangeFunction1),
+            buildNotificationOpntion("Cuenta Activa", valNotify2, onChangeFunction2),
+            buildNotificationOpntion("Oportunidad", valNotify3, onChangeFunction3),
+            SizedBox(height: 50),
+            Center(
+              child: OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)
+                  )
+                ), 
+                onPressed: (){},
+                child: Text("CERRAR SESION", style: TextStyle(
+                  fontSize: 16, 
+                  letterSpacing: 2.2, 
+                  color: Colors.black
+                )),
+              ),
+            )
           ],
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          // ... Other widgets
+    );
+  }
 
-          // Switch to toggle notifications
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Icon(
-                Icons.notifications,
-                color: Color(0xFF1F3DD0),
-              ),
-              Text(
-                'Notificaciones:',
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
-              const SizedBox(width: 20.0),
-              Switch(
-                value: notificationsEnabled,
-                onChanged: (newValue) {
-                  onNotificationToggle(newValue);
-                },
-                activeColor: Color(0xFF1F3DD0),
-              ),
-            ],
-          ),
+  Padding buildNotificationOpntion(String title, bool value, Function onChangeMethod) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title, style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[600]
+          )),
+          Transform.scale(
+            scale: 0.7,
+            child: CupertinoSwitch(
+              activeColor: Color(0xFF1F3DD0),
+              trackColor: Colors.grey,
+              value: value,
+              onChanged: (bool newValue){
+                onChangeMethod(newValue);
+              },
+            ),
+          )
         ],
       ),
+    );
+  }
+
+  GestureDetector buildAccountOpion(BuildContext context, String title){
+    return GestureDetector(
+      onTap:(){
+        showDialog(context: context, builder: (BuildContext context){
+          return AlertDialog(
+            title: Text(title),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text("Option 1"),
+                Text("Option 2"),
+              ],
+            ),
+            actions: [
+              TextButton(onPressed: (){
+                Navigator.of(context).pop();
+              },
+               child: Text("Cerrar")
+               )
+            ],
+          );
+        });
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(title, style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey
+            )),
+            Icon(Icons.arrow_back_ios, color: Colors.grey)
+          ],
+        ),
+      ) 
     );
   }
 }
