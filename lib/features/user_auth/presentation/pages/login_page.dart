@@ -195,7 +195,6 @@ class _LoginPageState extends State<LoginPage> {
       children: <Widget>[
         buildGoogleSignInButton(),
         const SizedBox(width: 16.0),
-        buildFacebookSignInButton(),
       ],
     );
   }
@@ -223,34 +222,6 @@ class _LoginPageState extends State<LoginPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
         child: Image.asset('assets/logogoogle.png', width: 24, height: 24),
-      ),
-    );
-  }
-
-  ElevatedButton buildFacebookSignInButton() {
-    return ElevatedButton(
-      onPressed: () {
-        // Lógica para iniciar sesión con Google
-      },
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        elevation: MaterialStateProperty.all<double>(0),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.all(0),
-        ),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-            side: BorderSide(
-              color: Colors.black.withOpacity(0.2),
-              width: 1.0,
-            ),
-          ),
-        ),
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        child: Image.asset('assets/logofacebook.png', width: 24, height: 24),
       ),
     );
   }

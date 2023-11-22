@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/features/user_auth/presentation/pages/list_workers.dart';
+import 'package:flutter_application_1/features/user_auth/presentation/pages/login_page.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -480,7 +481,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     borderRadius: BorderRadius.circular(20)
                   )
                 ), 
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                );
+                },
                 child: Text("CERRAR SESION", style: TextStyle(
                   fontSize: 16, 
                   letterSpacing: 2.2, 
