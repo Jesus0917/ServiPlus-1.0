@@ -85,15 +85,6 @@ class WorkerProfileScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
               ),
-              SizedBox(height: 10),
-              Text(
-                'Precio: $price', // Muestra el precio
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
-              ),
               SizedBox(height: 20),
               ElevatedButton.icon(
                 onPressed: () {
