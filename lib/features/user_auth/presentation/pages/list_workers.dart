@@ -38,7 +38,7 @@ class ListaTrabajadores extends StatelessWidget {
         elevation: 0,
         title: Center(
           child: Text(
-            'Personas Disponibles - $serviceName',
+            'Personas Disponibles',
             style: const TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,

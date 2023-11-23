@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/features/user_auth/presentation/pages/home_page.dart';
+import 'home_page.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -168,66 +168,166 @@ class WorkerProfileScreen extends StatelessWidget {
   }
   // Inicializa FlutterLocalNotificationsPlugin
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-      
-  // Función para enviar notificación
-  Future<void> _enviarNotificacion() async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'your channel id', // Cambia esto según tus necesidades
-      'your channel name', // Cambia esto según tus necesidades
-      importance: Importance.max,
-      priority: Priority.high,
-      showWhen: false,
-    );
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
+    FlutterLocalNotificationsPlugin();
 
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      'Trabajador Aceptado',
-      'Has aceptado a un trabajador',
-      platformChannelSpecifics,
-      payload: 'Trabajador aceptado',
-    );
-  }
+// Función para enviar notificación
+Future<void> _enviarNotificacion() async {
+  // **Importante:** Cambia 'trabajos_aceptados' y 'Trabajos Aceptados' por valores únicos para tu aplicación
+  const AndroidNotificationDetails androidPlatformChannelSpecifics =
+      AndroidNotificationDetails('trabajos_aceptados', 'Trabajos Aceptados',
+        importance: Importance.max,
+        priority: Priority.high,
+        playSound: true, // Añade un sonido a la notificación
+        showWhen: false,
+      );
+
+  const NotificationDetails platformChannelSpecifics =
+      NotificationDetails(android: androidPlatformChannelSpecifics);
+
+  await flutterLocalNotificationsPlugin.show(
+    0, // Identificador único de la notificación
+    'Trabajador Aceptado', // Título de la notificación
+    'Has aceptado a un trabajador', // Contenido de la notificación
+    platformChannelSpecifics,
+    payload: 'Trabajador aceptado', // Datos adicionales que se pueden pasar a la notificación
+  );
+}
 
 class ListaTrabajadores extends StatelessWidget {
   final List<Map<String, String>> workers;
+  final String serviceName;
 
-  const ListaTrabajadores(this.workers, {Key? key}) : super(key: key);
+  const ListaTrabajadores(this.workers, {super.key, required this.serviceName});
+
+  void _navigateToSettingsScreen(BuildContext context) {}
+
+  void _navigateToAccountScreen(BuildContext context) {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // ... otras configuraciones de la barra de aplicaciones
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Center(
+          child: Text(
+            'Personas Disponibles',
+            style: const TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+          ),
+        ),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
-            for (int index = 0; index < workers.length; index++)
-              GestureDetector(
-                onTap: () {
-                  Navigator.push(
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WorkerProfileScreen(
-                        serviceName: workers[index]['name'] ?? '',
-                      ),
-                    ),
-                  );
-                },
-                child: SizedBox(
-                  width: 500,
-                  child: WorkerContainer(
-                    name: workers[index]['name'] ?? '',
-                    price: workers[index]['price'] ?? '',
-                    imagePath: workers[index]['imagePath'] ?? '',
-                  ),
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Juan Pérez')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Juan Pérez',
+                  price: '\$20000/hora', 
+                  imagePath: '',
                 ),
               ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'María López')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'María López',
+                  price: '\$18000/hora',
+                  imagePath: '',
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Carlos Sánchez')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Carlos Sánchez',
+                  price: '\$25000/hora',
+                  imagePath: '',
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Ana Martínez')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Ana Martínez',
+                  price: '\$22000/hora',
+                  imagePath: '',
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Roberto Rodríguez')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Roberto Rodríguez',
+                  price: '\$30000/hora',
+                  imagePath: '',
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const WorkerProfileScreen(
+                            serviceName: 'Sara Gómez')));
+              },
+              child: const SizedBox(
+                width: 500, // Ancho personalizado
+                child: WorkerContainer(
+                  name: 'Sara Gómez',
+                  price: '\$18000/hora',
+                  imagePath: '',
+                ),
+              ),
+            ),
+            // Add more contenedores aquí
           ],
         ),
       ),

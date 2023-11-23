@@ -210,11 +210,11 @@ class WorkerContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(16.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
         color: Colors.white,
+        borderRadius: BorderRadius.circular(10.0),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),
@@ -224,31 +224,44 @@ class WorkerContainer extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
+      child: Row(
         children: [
+          // Imagen circular a la izquierda
           Container(
-            width: 100,
-            height: 100,
+            width: 80.0,
+            height: 80.0,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(imagePath),
+                image: AssetImage(imagePath.isEmpty
+                    ? 'assets/usuario-de-perfil.png'
+                    : imagePath),
               ),
             ),
           ),
-          const SizedBox(height: 10.0),
-          Text(
-            name,
-            style: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            price,
-            style: const TextStyle(
-              fontSize: 14.0,
+          SizedBox(width: 16.0), // Espacio entre la imagen y el texto
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Text(
+                  'Precio: $price',
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
