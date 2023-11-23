@@ -391,6 +391,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool valNotify1 = true;
   bool valNotify2 = false;
   bool valNotify3 = false;
+  
 
   void onChangeFunction1(bool newValue1) {
     setState(() {
@@ -451,11 +452,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Divider(height: 20,thickness: 1),
             SizedBox(height: 10),
-            buildAccountOpion(context, "Cambiar Contraseña"),
-            buildAccountOpion(context, "Configuracion de contenido"),
-            buildAccountOpion(context, "Social"),
-            buildAccountOpion(context, "Language"),
-            buildAccountOpion(context, "Privacidad y Seguridad"),
+            buildAccountOpion(context, "Cambiar Contraseña", ["-Cambiar contraseña actual", "-Restablecer contraseña",]),
+            buildAccountOpion(context, "Configuración de Contenido", [ "-Preferencias de notificaciones","-Configuración de privacidad","-Configurar preferencias de visualización"]),
+            buildAccountOpion(context, "Language", ["-Seleccionar idioma", ]),
+           buildAccountOpion(context, "Privacidad y Seguridad", [ "-Configuración de privacidad de perfil", "-Seguridad de la cuenta", "-Gestión de datos personales"]),
+
             SizedBox(height: 40),
             Row(
               children: [
@@ -469,9 +470,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             Divider(height: 20, thickness: 1),
             SizedBox(height: 10),
-            buildNotificationOpntion("Tema Oscuro", valNotify1, onChangeFunction1),
-            buildNotificationOpntion("Cuenta Activa", valNotify2, onChangeFunction2),
-            buildNotificationOpntion("Oportunidad", valNotify3, onChangeFunction3),
+            buildAccountOption("Cuenta Activa"), 
+            buildNotificationOpntion("Modo servicio", valNotify3, onChangeFunction3),
+
+
             SizedBox(height: 50),
             Center(
               child: OutlinedButton(
@@ -500,70 +502,147 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Padding buildNotificationOpntion(String title, bool value, Function onChangeMethod) {
+Widget buildAccountOption(String title) {
+  if (title == "Cuenta Activa") {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-            color: Colors.grey[600]
-          )),
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600],
+            ),
+          ),
           Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
+            scale: 1,
+            child: Switch(
               activeColor: Color(0xFF1F3DD0),
-              trackColor: Colors.grey,
-              value: value,
-              onChanged: (bool newValue){
-                onChangeMethod(newValue);
+              value: valNotify2, // Usar el valor correspondiente
+              onChanged: (bool newValue) {
+                onChangeFunction2(newValue); // Llamar a la función correspondiente
+                if (newValue) {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text(title),
+                        content: Text('¡Su cuenta está activa!'),
+                        actions: [
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Cerrar"),
+                          )
+                        ],
+                      );
+                    },
+                  );
+                }
               },
             ),
-          )
+          ),
         ],
       ),
     );
+  } else {
+    return buildNotificationOpntion(title, false, () {}); // Otras opciones diferentes a "Cuenta Activa"
   }
+}
 
-  GestureDetector buildAccountOpion(BuildContext context, String title){
-    return GestureDetector(
-      onTap:(){
-        showDialog(context: context, builder: (BuildContext context){
-          return AlertDialog(
-            title: Text(title),
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text("Option 1"),
-                Text("Option 2"),
+
+Padding buildNotificationOpntion(String title, bool value, Function onChangeMethod) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w500,
+            color: Colors.grey[600]
+          ),
+        ),
+        Switch(
+          activeColor: Color(0xFF1F3DD0),
+          value: value,
+          onChanged: (bool newValue) {
+            onChangeMethod(newValue);
+          },
+        ),
+      ],
+    ),
+  );
+}
+
+
+GestureDetector buildAccountOpion(BuildContext context, String title, List<String> options) {
+  return GestureDetector(
+    onTap: () {
+      if (title == "Cuenta Activa") {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Text('¡Su cuenta está activa!'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cerrar"),
+                )
               ],
-            ),
-            actions: [
-              TextButton(onPressed: (){
-                Navigator.of(context).pop();
-              },
-               child: Text("Cerrar")
-               )
-            ],
-          );
-        });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: TextStyle(
+            );
+          },
+        );
+      } else {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: options.map((option) => Text(option)).toList(),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("Cerrar"),
+                )
+              ],
+            );
+          },
+        );
+      }
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w500,
-              color: Colors.grey
-            )),
-            Icon(Icons.arrow_back_ios, color: Colors.grey)
-          ],
-        ),
-      ) 
-    );
-  }
+              color: Colors.grey,
+            ),
+          ),
+          Icon(Icons.arrow_back_ios, color: Colors.grey)
+        ],
+      ),
+    ),
+  );
+}
 }
