@@ -484,9 +484,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Divider(height: 20, thickness: 1),
             SizedBox(height: 10),
             buildAccountOption("Cuenta Activa"), 
-            buildNotificationOpntion("Modo servicio", valNotify3, onChangeFunction3),
-
-
             SizedBox(height: 50),
             Center(
               child: OutlinedButton(
